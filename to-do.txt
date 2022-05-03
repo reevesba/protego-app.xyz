@@ -17,7 +17,7 @@ Complete
     maybe try updating the requires auth decorator
 * build public api (with token of course) and throw in some api documentation
 * do documentation component
-* search for any hardcoded 'localhost' or 'localhost:4200' and update for prd
+* search for any hardcoded 'localhost' or 'localhost:4200' and update for prd env
 * run translate python script
 
 On Hold
