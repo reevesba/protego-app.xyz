@@ -21,6 +21,7 @@ export class TestComponent implements OnInit {
   models: Model[];
   isLoading: boolean = false;
   selection: number = null;
+  submitted: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -118,6 +119,7 @@ export class TestComponent implements OnInit {
   }
 
   test() {
+    this.submitted = true;
     this.resp.reset();
     this.isLoading = true;
     this.testModel = new TestModel(this.testForm.value);

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class BatchNB {\n  constructor(init) {\n    // Model Fields\n    this.group_id = 0;\n    this.algorithm = '';\n    this.name = null; // Hyperparameters\n\n    this.alpha = 1.0;\n    this.fit_prior = 'true';\n    this.class_prior = null;\n    Object.assign(this, init);\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

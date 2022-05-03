@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class TrainModel {\n  constructor(init) {\n    this.groupId = 0;\n    this.modelId = 0;\n    this.trainStart = 0;\n    this.trainEnd = 0;\n    this.purgePayloads = 0;\n    this.updated_by = '';\n    Object.assign(this, init);\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

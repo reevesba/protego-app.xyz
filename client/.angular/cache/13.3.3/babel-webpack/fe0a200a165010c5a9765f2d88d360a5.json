@@ -1,0 +1,1 @@
+{"ast":null,"code":"export function appInitializer(authService) {\n  return () => new Promise(resolve => {\n    // attempt to refresh token on app start up to auto authenticate\n    authService.refreshToken().subscribe().add(resolve);\n  });\n}","map":null,"metadata":{},"sourceType":"module"}

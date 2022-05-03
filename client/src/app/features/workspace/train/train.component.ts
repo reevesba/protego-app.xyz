@@ -20,6 +20,7 @@ export class TrainComponent implements OnInit {
   groups: Group[];
   models: Model[];
   isLoading: boolean = false;
+  submitted: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -90,6 +91,7 @@ export class TrainComponent implements OnInit {
   }
 
   train() {
+    this.submitted = true;
     this.resp.reset();
     this.isLoading = true;
     this.trainModel = new TrainModel(this.trainForm.value);

@@ -2,6 +2,7 @@ To-do
 -----
 * deploy to DO - Docker 19.03.12 on Ubuntu 20.04
 * run certbot
+* update readme
 
 Complete
 --------

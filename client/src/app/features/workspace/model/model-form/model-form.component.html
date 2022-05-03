@@ -9,7 +9,7 @@
                 {{ paradigm.viewValue }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="(modelFormControl.paradigm.touched || submitted) && modelFormControl.paradigm.errors?.required">
+            <mat-error *ngIf="(modelFormControl.paradigm.touched) && modelFormControl.paradigm.errors?.required">
               <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
               {{ 'protego.model-form.paradigm.error' | translate }}
             </mat-error>
@@ -22,7 +22,7 @@
                 {{ algorithm.viewValue }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="(modelFormControl.algorithm.touched || submitted) && modelFormControl.algorithm.errors?.required">
+            <mat-error *ngIf="(modelFormControl.algorithm.touched) && modelFormControl.algorithm.errors?.required">
               <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
               {{ 'protego.model-form.algorithm.error' | translate }}
             </mat-error>

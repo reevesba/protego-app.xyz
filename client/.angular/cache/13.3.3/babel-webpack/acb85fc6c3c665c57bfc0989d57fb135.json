@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class OnlinePerceptron {\n  constructor(init) {\n    // Model Fields\n    this.group_id = 0;\n    this.algorithm = '';\n    this.name = null; // Hyperparameters\n\n    this.l2 = 0.0;\n    this.clip_gradient = 1000000000000.0;\n    this.initializer = null;\n    Object.assign(this, init);\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

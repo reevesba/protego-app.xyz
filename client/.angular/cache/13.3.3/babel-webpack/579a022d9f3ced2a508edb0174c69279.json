@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class User {\n  constructor(init) {\n    Object.assign(this, init);\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

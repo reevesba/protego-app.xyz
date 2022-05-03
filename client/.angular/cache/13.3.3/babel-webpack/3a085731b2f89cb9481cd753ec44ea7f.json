@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class TestModel {\n  constructor(init) {\n    this.groupId = 0;\n    this.modelId = 0;\n    this.sampleMode = 0;\n    this.sample = '';\n    this.trainStart = 0;\n    this.trainEnd = 0;\n    Object.assign(this, init);\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
