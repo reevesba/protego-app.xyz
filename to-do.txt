@@ -1,7 +1,5 @@
 To-do
 -----
-* deploy to DO - Docker 19.03.12 on Ubuntu 20.04
-* run certbot
 * update readme
 
 Complete
@@ -20,6 +18,8 @@ Complete
 * do documentation component
 * search for any hardcoded 'localhost' or 'localhost:4200' and update for prd env
 * run translate python script
+* deploy to DO - Docker 19.03.12 on Ubuntu 20.04
+* run certbot
 
 On Hold
 -------
@@ -39,3 +39,9 @@ Delete, dist and egg then increment the version in setup.py
 $ python3 -m build
 $ python3 -m twine upload --repository testpypi dist/*
     - username is __token__, password is token value
+
+Certbot
+-------
+Wasn't working the first day I tried, two things
+    1. init-letsencrypt.sh needs to be in app directory
+    2. Maybe it tooks some time for A DNS records to register
