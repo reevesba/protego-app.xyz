@@ -6,7 +6,7 @@ export const environment = {
   production: true,
   stage: false,
   test: false,
-  apiUrl: 'https://protego-app.xyz/api',
+  apiUrl: 'http://protego-app.xyz/api',
   i18nPrefix: '',
   versions: {
     app: packageJson.version,
