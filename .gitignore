@@ -3,14 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Mac custom attributes file (Desktop Service Store)
-.DS_Store
-
-# PyCharm files
-.idea/
-
-# Angular node_modules directory
+# Angular client directories
 client/node_modules
+client/dist
+client/e2e
 
-# Environment variable
-#.env
+# Environment variables
+.env

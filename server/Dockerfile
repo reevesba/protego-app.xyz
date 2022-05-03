@@ -1,6 +1,6 @@
-FROM python:3.6.2
+FROM python:3.10.4
 
-MAINTAINER Sanjiv Kumar "mr.san.kumar@gmail.com"
+LABEL Bradley Reeves "reevesbra@outlook.com"
 
 ENV PYTHONUNBUFFERED 1
 
@@ -16,7 +16,10 @@ COPY . /usr/src/app/
 RUN chmod 777 /usr/src/app/entrypoint.sh
 
 # Install the Python libraries
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Install protego from TestPyPI
+RUN pip3 install -i https://test.pypi.org/simple/ protego
 
 # COPY uswgi.ini
 COPY ./uwsgi.ini /etc/uwsgi.ini

@@ -1,17 +1,20 @@
 """
-Test Suite for Flask. 
+Test Suite for Flask.
 To run:
 python test_suite test
 python test_suite cov
 """
 
+import os
 import unittest
+from datetime import datetime
 from coverage import coverage
 from flask_script import Manager
 
 from server.main import db
 from server.main.api import create_app_blueprint
 from server.main.models.user import User
+from server.main.models.role import Role
 
 COV = coverage(
     branch=True,
@@ -45,6 +48,7 @@ def test():
         return 0
     return 1
 
+
 @manager.command
 def cov():
     """Runs the unit tests with coverage."""
@@ -60,26 +64,48 @@ def cov():
         return 0
     return 1
 
+
 @manager.command
 def recreate_db():
-    db.drop_all()
+    # db.drop_all()
     db.create_all()
     db.session.commit()
 
+
 @manager.command
 def seed_db():
-    """Seed the user table in test_db database."""
-    db.session.add(User(
-        username='sanjiv',
-        email='mr.san.kumar@gmail.com',
-        password='sanjiv'
-    ))
-    db.session.add(User(
-        username='admin',
-        email='admin@gmail.com',
-        password='admin'
-    ))
-    db.session.commit()
+    print('Seeding database...')
+    photo_url_a = 'static/profile_photos/default-yoda-'
+    photo_url_b = '3.14159265358979323846264338327950288419716939937510.jpg'
+    if not User.query.filter(User.username == 'admin').first():
+        user = User(
+            username='admin',
+            photo_url=photo_url_a + photo_url_b,
+            first_name='Bradley',
+            last_name='Reeves',
+            email=os.getenv('PROTEGO_EMAIL'),
+            email_confirmed_at=datetime.utcnow(),
+            password=os.getenv('PROTEGO_PASSWORD'),
+            created_by='seed script'
+        )
+        role = Role(
+            name='admin',
+            description='System Administrator',
+            created_by='seed script'
+        )
+        user.roles.append(role)
+        db.session.add(user)
+        db.session.commit()
+
+    if not Role.query.filter(Role.name == 'member').first():
+        member_role = Role(
+            name='member',
+            description='Site User',
+            created_by='seed script'
+        )
+        db.session.add(member_role)
+        db.session.commit()
+
 
 if __name__ == '__main__':
     manager.run()

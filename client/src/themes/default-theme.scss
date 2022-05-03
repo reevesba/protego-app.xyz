@@ -1,0 +1,5 @@
+$protego-primary: mat-palette($mat-indigo, 700, 500, 900);
+$protego-accent: mat-palette($mat-light-blue);
+$protego-warn: mat-palette($mat-pink, 600);
+
+$protego-theme: mat-light-theme($protego-primary, $protego-accent, $protego-warn);

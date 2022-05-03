@@ -1,0 +1,103 @@
+<div class="protego-page-container">
+    <h2>{{ 'protego.workspace.menu.model' | translate }}</h2>
+    <p>{{ 'protego.model.info' | translate }}</p>
+
+    <mat-divider class="protego-divider"></mat-divider>
+
+    <div style="float: left; margin-top: 4em;">
+        <h3>Group {{ currentGroupName }} ({{ modelsCount }})</h3>
+    </div>
+
+    <div style="clear: both;" *ngIf="currentGroup">
+        <button style="float: left;" *ngIf="modelsCount < 25" mat-button [routerLink]="['../model-form', currentGroup]" mat-raised-button color="primary" attr.aria-label="{{ 'protego.model.aria1' | translate }}">{{ 'protego.model.button1' | translate }}</button>
+    </div>
+
+    <mat-form-field style="float: right;">
+        <mat-label>{{ 'protego.group-members.select-label' | translate }}</mat-label>
+        <mat-select #select (selectionChange)="groupFieldChange($event.source.value)" [(value)]="currentGroup">
+            <mat-option *ngFor="let group of groups" [value]="group.id" role="option">
+                {{ group.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="protego-table-container mat-elevation-z8">
+        <table mat-table #modelTable [dataSource]="modelDataSource" matSort>
+
+            <!-- id column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.model.id' | translate }} </th>
+                <td mat-cell *matCellDef="let model"> {{ model.id }} </td>
+            </ng-container>
+
+            <!-- name column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.model.name' | translate }} </th>
+                <td mat-cell *matCellDef="let model"> {{ model.name }} </td>
+            </ng-container>
+
+            <!-- group_id column -->
+            <ng-container matColumnDef="group_id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.model.group-id' | translate }} </th>
+                <td mat-cell *matCellDef="let model"> {{ model.group_id }} </td>
+            </ng-container>
+
+            <!-- algorithm column -->
+            <ng-container matColumnDef="algorithm">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.model.algorithm' | translate }} </th>
+                <td mat-cell *matCellDef="let model"> {{ model.algorithm }} </td>
+            </ng-container>
+
+            <!-- active column -->
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.model.active' | translate }} </th>
+                <td mat-cell *matCellDef="let model"> {{ model.active }} </td>
+            </ng-container>
+
+            <!-- created at column -->
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.model.created.at' | translate }} </th>
+                <td mat-cell *matCellDef="let model"> {{ model.created_at }} </td>
+            </ng-container>
+
+            <!-- created by column -->
+            <ng-container matColumnDef="created_by">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.model.created.by' | translate }} </th>
+                <td mat-cell *matCellDef="let model"> {{ model.created_by }} </td>
+            </ng-container>
+
+            <!-- updated at column -->
+            <ng-container matColumnDef="updated_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.model.updated.at' | translate }} </th>
+                <td mat-cell *matCellDef="let model"> {{ model.updated_at }} </td>
+            </ng-container>
+
+            <!-- last updated by column -->
+            <ng-container matColumnDef="updated_by">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.model.updated.by' | translate }} </th>
+                <td mat-cell *matCellDef="let model"> {{ model.updated_by }} </td>
+            </ng-container>
+
+            <!-- action column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="protego-fixed-column"> {{ 'protego.model.action' | translate }} </th>
+                <td mat-cell *matCellDef="let element" class="action-link"> 
+                    <button mat-button *ngIf="element.id != null && currentGroupAdmin === username" (click)="getParameters(element)" mat-raised-button color="primary" attr.aria-label="{{ 'protego.model.aria3' | translate }}">
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                    <button mat-button *ngIf="element.id != null && currentGroupAdmin === username" (click)="openDeleteDialog(element)" mat-raised-button color="warn" attr.aria-label="{{ 'protego.model.aria4' | translate }}">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button>  
+                </td>
+            </ng-container>
+
+            <!-- header row -->
+            <tr mat-header-row *matHeaderRowDef="modelColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: modelColumns;"></tr>
+
+            <!-- row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">{{ 'protego.model.empty' | translate }}</td>
+        </table>
+    </div>
+</div>

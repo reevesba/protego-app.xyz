@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ 'protego.dialog-box.title' | translate }}</h1>
+<p mat-dialog-subtitle>
+    <mat-error *ngIf="error" class="protego-error-container">
+        <mat-icon>error_outline</mat-icon>
+        {{ error | translate }}
+    </mat-error>
+</p>
+
+<div mat-dialog-content>
+    <div class="protego-profile-picture">
+        <img *ngIf="url" width=300 height=300 [src]="sanitizer.bypassSecurityTrustUrl(url)" alt="{{ 'protego.dialog-box.alt' | translate }}"/>
+        <label *ngIf="editmode" for="uploader-input" ng2FileDrop [ngClass]="{ 'protego-drag-over': hasDragOver }" (fileOver)="fileOver($event)" [uploader]="uploader">
+            <div class="protego-infotext">
+                <span>{{ 'protego.dialog-box.inst1' | translate }}<br>{{ 'protego.dialog-box.inst2' | translate }}</span>
+            </div>
+        </label>
+        <input *ngIf="editmode" type="file" name="file" ng2FileSelect [uploader]="uploader" id="uploader-input" style="display: none;"/>
+    </div> 
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="doAction()" color="primary" attr.aria-label="{{ 'protego.dialog-box.aria1' | translate }}">{{ 'protego.dialog-box.button1' | translate }}</button>
+    <button mat-button (click)="closeDialog()" mat-flat-button attr.aria-label="{{ 'protego.dialog-box.aria2' | translate }}">{{ 'protego.dialog-box.button2' | translate }}</button>
+</div>

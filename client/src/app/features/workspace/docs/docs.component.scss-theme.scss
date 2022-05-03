@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+
+@mixin protego-doc-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .protego-code-block {
+        background-color: mat-color($accent, lighter);
+        border: 1px solid mat-color($primary, lighter);
+    }
+
+    .protego-code {
+        color: mat-color($accent, default-contrast);
+    }
+
+    .protego-code-span {
+        background-color: mat-color($primary, lighter);
+        color: mat-color($primary, default-contrast);
+    }
+}

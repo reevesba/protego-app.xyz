@@ -1,0 +1,62 @@
+@import '../../../../styles-variables';
+
+div.protego-tiles {
+  display: grid;
+  grid-gap: 15px;
+  padding: 15px;
+  margin: auto;
+}
+
+.mat-icon {
+  font-size: 80px;
+  width: 100%;
+  text-align: center;
+}
+
+.protego-tile {
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250px;
+  width: 250px;
+  cursor: pointer;
+}
+
+.protego-subtitle {
+  padding-left: 15px;
+}
+
+@media (min-width: map-get($grid-breakpoints, xs)) {
+  div.protego-tiles {
+    grid-template-columns: 1fr;
+    width: 250px;
+  }
+} 
+
+@media (min-width: map-get($grid-breakpoints, sm)) {
+  div.protego-tiles {
+    grid-template-columns: 1fr 1fr;
+    width: 515px;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, md)) {
+  div.protego-tiles {
+    grid-template-columns: 1fr 1fr;
+    width: 515px;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)) {
+  div.protego-tiles {
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 780px;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, xl)) {
+  div.protego-tiles {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 1045px;
+  }
+}

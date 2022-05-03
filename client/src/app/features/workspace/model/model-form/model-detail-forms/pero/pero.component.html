@@ -1,0 +1,62 @@
+<div class="protego-page-container">
+  <mat-card>
+    <h2 style="float: left;">{{ 'protego.model-form.pero.header' | translate }}</h2>
+    <a style="float: right;" href="https://riverml.xyz/latest/api/linear-model/Perceptron/" target="_blank">
+      <mat-icon>help_outline</mat-icon>
+    </a>
+      <form class="protego-form" [formGroup]="modelForm">
+        <!-- name -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.pero.name' | translate }}</mat-label>
+          <input matInput formControlName="name">
+          <mat-hint align="end">{{ 'protego.model-form.pero.name.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.name.touched) && modelFormControl.name.errors?.required">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.pero.name.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- l2 -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.pero.field1' | translate }}</mat-label>
+          <input type="number" matInput formControlName="l2">
+          <mat-hint align="end">{{ 'protego.model-form.pero.field1.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.l2.touched) && modelFormControl.l2.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.pero.field1.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- clip_gradient -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.pero.field2' | translate }}</mat-label>
+          <input type="number" matInput formControlName="clip_gradient">
+          <mat-hint align="end">{{ 'protego.model-form.pero.field2.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.clip_gradient.touched) && modelFormControl.clip_gradient.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.pero.field2.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- initializer -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.pero.field3' | translate }}</mat-label>
+          <mat-select formControlName="initializer">
+            <mat-option *ngFor="let initializer of initializers" [value]="initializer.value">
+              {{ initializer.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="saveModel()" class="protego-save-button" [disabled]="!modelForm.valid" attr.aria-label="{{ 'protego.model-form.button1.aria' | translate }}">{{ 'protego.model-form.button1' | translate }}</button>
+      </mat-card-actions>
+      <mat-card-footer>
+        <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+      </mat-card-footer>  
+  </mat-card>
+  <mat-card *ngIf="errorMsg" style="margin-top: 0.5em; border: 1px solid red;">
+    <h6>{{ 'protego.error' | translate }}:</h6>
+    <p>{{ errorMsg }}</p>
+  </mat-card>
+</div>

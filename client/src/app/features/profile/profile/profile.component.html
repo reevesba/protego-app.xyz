@@ -1,0 +1,32 @@
+<div class="protego-page-container">
+    <p style="margin-bottom: 1em;">{{ 'protego.profile.info' | translate }}</p>
+  
+    <mat-card>
+      <mat-card-header>
+        <img mat-card-avatar [src]="photoUrl" class="protego-card-header-image" matTooltip="{{ 'protego.profile.tooltip' | translate }}" (click)="openDialog()" alt="{{ 'protego.profile.alt' | translate }}">
+        <mat-card-title>{{ user.username }}</mat-card-title>
+        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="protego-form" [formGroup]="userForm">
+          <mat-form-field class="protego-full-width">
+            <input matInput placeholder="{{ 'protego.profile.firstname' | translate }}" formControlName="first_name" required (keyup)="updateFirstName($event)">
+            <mat-error *ngIf="(userFormControl.first_name.touched || submitted) && userFormControl.first_name.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.profile.firstname.warn' | translate }}
+            </mat-error>
+          </mat-form-field>
+    
+          <mat-form-field class="protego-full-width">
+            <input matInput placeholder="{{ 'protego.profile.lastname' | translate }}" formControlName="last_name" required (keyup)="updateLastName($event)">
+            <mat-error *ngIf="(userFormControl.last_name.touched || submitted) && userFormControl.last_name.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.profile.lastname.warn' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+  
+      <button mat-raised-button color="primary" (click)="saveUser()" [disabled]="!userForm.valid" class="protego-save-button" attr.aria-label="{{ 'protego.profile.aria' | translate }}">{{ 'protego.profile.button' | translate }}</button>
+    </mat-card>
+  </div>

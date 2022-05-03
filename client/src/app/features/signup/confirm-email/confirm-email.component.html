@@ -1,0 +1,21 @@
+<div class="protego-page-wrapper">
+    <mat-card *ngIf="isConfirmed; else elseTemplate">
+        <mat-card-title>{{ 'protego.confirm-email.title' | translate }}</mat-card-title>
+        <mat-card-subtitle>{{ 'protego.confirm-email.confirmed' | translate }}</mat-card-subtitle>
+        <mat-card-content>{{ 'protego.confirm-email.info' | translate }}</mat-card-content>
+    </mat-card>
+
+    <ng-template #elseTemplate>
+        <mat-card>
+            <mat-card-title>{{ 'protego.confirm-email.apologies' | translate }}</mat-card-title>
+            <mat-card-subtitle>{{ 'protego.confirm-email.error' | translate }}</mat-card-subtitle>
+            <mat-card-content>{{ 'protego.confirm-email.detail' | translate }}</mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" attr.aria-label="{{ 'protego.confirm-email.aria' | translate }}">{{ 'protego.confirm-email.resend' | translate }}</button>
+            </mat-card-actions>
+            <mat-card-footer>
+                <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+              </mat-card-footer>
+        </mat-card>
+    </ng-template>
+</div>

@@ -1,0 +1,31 @@
+@import '../../../../styles-variables';
+
+.protego-page-container {
+  height: 100%;
+  width: 100%;
+  overflow: clip;
+}
+
+.protego-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+mat-sidenav-container {
+  height: 100%;
+  width: 100%;
+
+  @media (max-width: $toolbar-breakpoint) {
+    .protego-content {
+      margin-top: 56px !important;
+    }
+  }
+}
+
+mat-sidenav {
+  width: 250px;
+
+  .mat-nav-list {
+    padding-top: 0;
+  }
+}

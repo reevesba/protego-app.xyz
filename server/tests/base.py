@@ -5,6 +5,7 @@ from server.main.api import create_app_blueprint
 from server.main import db
 from server.tests import config_name
 
+
 class BaseTestCase(unittest.TestCase):
     """A base class for test setup"""
 

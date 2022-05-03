@@ -1,0 +1,249 @@
+<div class="protego-page-container">
+  <mat-card>
+    <h2 style="float: left;">{{ 'protego.model-form.treo.header' | translate }}</h2>
+    <a style="float: right;" href="https://riverml.xyz/latest/api/tree/HoeffdingAdaptiveTreeClassifier/" target="_blank">
+      <mat-icon>help_outline</mat-icon>
+    </a>
+      <form class="protego-form" [formGroup]="modelForm">
+        <!-- name -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.name' | translate }}</mat-label>
+          <input matInput formControlName="name">
+          <mat-hint align="end">{{ 'protego.model-form.treo.name.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.name.touched) && modelFormControl.name.errors?.required">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.name.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- grace_period -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field1' | translate }}</mat-label>
+          <input type="number" matInput formControlName="grace_period">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field1.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.grace_period.touched) && modelFormControl.grace_period.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field1.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.grace_period.touched) && modelFormControl.grace_period.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field1.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- max_depth -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field2' | translate }}</mat-label>
+          <input type="number" matInput formControlName="max_depth">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field2.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.max_depth.touched) && modelFormControl.max_depth.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field2.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.max_depth.touched) && modelFormControl.max_depth.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field2.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- split_criterion -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field3' | translate }}</mat-label>
+          <mat-select formControlName="split_criterion">
+            <mat-option *ngFor="let criterion of criterions" [value]="criterion.value">
+              {{ criterion.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- split_confidence -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field4' | translate }}</mat-label>
+          <input type="number" matInput formControlName="split_confidence">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field4.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.split_confidence.touched) && modelFormControl.split_confidence.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field4.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- tie_threshold -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field5' | translate }}</mat-label>
+          <input type="number" matInput formControlName="tie_threshold">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field5.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.tie_threshold.touched) && modelFormControl.tie_threshold.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field5.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- leaf_prediction -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field6' | translate }}</mat-label>
+          <mat-select formControlName="leaf_prediction">
+            <mat-option *ngFor="let prediction of predictions" [value]="prediction.value">
+              {{ prediction.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- nb_threshold -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field7' | translate }}</mat-label>
+          <input type="number" matInput formControlName="nb_threshold">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field7.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.nb_threshold.touched) && modelFormControl.nb_threshold.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field7.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.nb_threshold.touched) && modelFormControl.nb_threshold.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field7.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- nominal_attributes -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field8' | translate }}</mat-label>
+          <input type="number" matInput formControlName="nominal_attributes">
+        </mat-form-field>
+
+        <!-- splitter -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field9' | translate }}</mat-label>
+          <mat-select formControlName="splitter">
+            <mat-option *ngFor="let splitter of splitters" [value]="splitter.value">
+              {{ splitter.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- bootstrap_sampling -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field10' | translate }}</mat-label>
+          <mat-select formControlName="bootstrap_sampling">
+            <mat-option value="false">{{ 'protego.model-form.treo.field10.option1' | translate }}</mat-option>
+            <mat-option value="true">{{ 'protego.model-form.treo.field10.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- drift_window_threshold -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field11' | translate }}</mat-label>
+          <input type="number" matInput formControlName="drift_window_threshold">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field11.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.drift_window_threshold.touched) && modelFormControl.drift_window_threshold.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field11.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.drift_window_threshold.touched) && modelFormControl.drift_window_threshold.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field11.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- adwin_confidence -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field12' | translate }}</mat-label>
+          <input type="number" matInput formControlName="adwin_confidence">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field12.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.adwin_confidence.touched) && modelFormControl.adwin_confidence.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field12.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- binary_split -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field13' | translate }}</mat-label>
+          <mat-select formControlName="binary_split">
+            <mat-option value="false">{{ 'protego.model-form.treo.field13.option1' | translate }}</mat-option>
+            <mat-option value="true">{{ 'protego.model-form.treo.field13.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- max_size -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field14' | translate }}</mat-label>
+          <input type="number" matInput formControlName="max_size">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field14.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.max_size.touched) && modelFormControl.max_size.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field14.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.max_size.touched) && modelFormControl.max_size.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field14.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- memory_estimate_period -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field15' | translate }}</mat-label>
+          <input type="number" matInput formControlName="memory_estimate_period">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field15.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.memory_estimate_period.touched) && modelFormControl.memory_estimate_period.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field15.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.memory_estimate_period.touched) && modelFormControl.memory_estimate_period.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field15.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- stop_mem_management -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field16' | translate }}</mat-label>
+          <mat-select formControlName="stop_mem_management">
+            <mat-option value="false">{{ 'protego.model-form.treo.field16.option1' | translate }}</mat-option>
+            <mat-option value="true">{{ 'protego.model-form.treo.field16.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- remove_poor_attrs -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field17' | translate }}</mat-label>
+          <mat-select formControlName="remove_poor_attrs">
+            <mat-option value="false">{{ 'protego.model-form.treo.field17.option1' | translate }}</mat-option>
+            <mat-option value="true">{{ 'protego.model-form.treo.field17.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- merit_preprune -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field18' | translate }}</mat-label>
+          <mat-select formControlName="merit_preprune">
+            <mat-option value="false">{{ 'protego.model-form.treo.field18.option1' | translate }}</mat-option>
+            <mat-option value="true">{{ 'protego.model-form.treo.field18.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- seed -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.treo.field19' | translate }}</mat-label>
+          <input type="number" matInput formControlName="seed">
+          <mat-hint align="end">{{ 'protego.model-form.treo.field19.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.seed.touched) && modelFormControl.seed.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field19.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.seed.touched) && modelFormControl.seed.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.treo.field19.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="saveModel()" class="protego-save-button" [disabled]="!modelForm.valid" attr.aria-label="{{ 'protego.model-form.button1.aria' | translate }}">{{ 'protego.model-form.button1' | translate }}</button>
+      </mat-card-actions>
+      <mat-card-footer>
+        <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+      </mat-card-footer>
+  </mat-card>
+  <mat-card *ngIf="errorMsg" style="margin-top: 0.5em; border: 1px solid red;">
+    <h6>{{ 'protego.error' | translate }}:</h6>
+    <p>{{ errorMsg }}</p>
+  </mat-card>
+</div>

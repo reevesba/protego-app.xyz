@@ -7,5 +7,6 @@ class TestRoutes(BaseTestCase):
     """Class to test all route methods"""
     pass
 
+
 if __name__ == '__main__':
     unittest.main()

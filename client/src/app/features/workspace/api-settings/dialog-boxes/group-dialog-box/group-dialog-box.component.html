@@ -1,0 +1,36 @@
+<h1 mat-dialog-title><strong>{{ action }} {{ 'protego.group-dialog-box.title' | translate }}</strong></h1>
+<div mat-dialog-content>
+    <form class="form" [formGroup]="fg">
+        <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+            <input [placeholder]="label1" matInput (keyup)="updateField1($event)" formControlName="value1" required>
+            <mat-error *ngIf="(formControl.value1.touched || submitted) && formControl.value1.errors?.required">
+                <mat-icon class="protego-icon">error_outline</mat-icon>
+                {{ 'protego.group-dialog-box.error1' | translate }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="action != 'Delete'">
+            <input [placeholder]="label2" matInput (keyup)="updateField2($event)" formControlName="value2" required>
+            <mat-error *ngIf="(formControl.value2.touched || submitted) && formControl.value2.errors?.required">
+                <mat-icon class="protego-icon">error_outline</mat-icon>
+                {{ 'protego.group-dialog-box.error2' | translate }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="action != 'Delete'">
+            <input [placeholder]="label3" matInput (keyup)="updateField3($event)" formControlName="value3" required>
+            <mat-error *ngIf="(formControl.value3.touched || submitted) && formControl.value3.errors?.required">
+                <mat-icon class="protego-icon">error_outline</mat-icon>
+                {{ 'protego.group-dialog-box.error3' | translate }}
+            </mat-error>
+        </mat-form-field>
+    </form>
+    
+    <ng-template #elseTemplate>
+        <b class="protego-warning">{{ 'protego.group-dialog-box.template1' | translate }}:</b> {{ 'protego.group-dialog-box.template2' | translate }} <b>{{ localData.value1 }}</b>. {{ 'protego.group-dialog-box.template3' | translate }}.
+    </ng-template>
+</div>
+<div mat-dialog-actions class="protego-actions">
+    <button mat-raised-button (click)="doAction()" color="warn" [disabled]="!fg.valid" attr.aria-label="do action">{{ action }}</button>
+    <button mat-raised-button (click)="closeDialog()" attr.aria-label="save">{{ 'protego.group-dialog-box.button' | translate }}</button>
+</div>

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title><strong>{{ header }}{{ name }}</strong></h1>
+<div mat-dialog-content>
+    <div *ngIf="action != 'Delete'; else elseTemplate">
+        <p [innerHTML]="body"></p>
+    </div>
+
+    <ng-template #elseTemplate>
+        <b class="protego-warning">{{ 'protego.dialog-box1.info4' | translate }}:</b> {{ 'protego.dialog-box1.info5' | translate }} <b>{{ name }}</b>. {{ 'protego.dialog-box1.info6' | translate }}.
+    </ng-template>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="doAction()" color="warn" attr.aria-label="do action" *ngIf="action === 'Delete'">{{ action }}</button>
+    <button mat-raised-button (click)="closeDialog()" attr.aria-label="cancel">{{ 'protego.dialog-box1.info7' | translate }}</button>
+</div>

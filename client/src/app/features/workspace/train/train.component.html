@@ -1,0 +1,83 @@
+<div class="protego-page-container">
+    <mat-card>
+      <h2>{{ 'protego.workspace.train.header' | translate }}</h2>
+      <p><strong>{{ 'protego.train.message1' | translate }}: </strong>{{ 'protego.train.message2' | translate }}.</p>
+        <form class="protego-form" [formGroup]="trainForm">
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.train.field1' | translate }}</mat-label>
+            <mat-select formControlName="groupId" (selectionChange)="setModels($event)" required>
+              <mat-option *ngFor="let group of groups" [value]="group.id">
+                {{ group.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="(trainFormControl.groupId.touched || submitted) && trainFormControl.groupId.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.workspace.train.field1.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.train.field2' | translate }}</mat-label>
+            <mat-select formControlName="modelId" (selectionChange)="resetForm()" required>
+              <mat-option *ngFor="let model of models" [value]="model.id">
+                {{ model.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="(trainFormControl.modelId.touched || submitted) && trainFormControl.modelId.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.workspace.train.field2.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.train.field3' | translate }}</mat-label>
+            <input type="number" matInput formControlName="trainStart">
+            <mat-error *ngIf="(trainFormControl.trainStart.touched || submitted) && trainFormControl.trainStart.errors?.required">
+                <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                {{ 'protego.workspace.train.field3.error' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(trainFormControl.trainStart.touched) && trainFormControl.trainStart.errors?.notInteger">
+                <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                {{ 'protego.model-form.treb.field9.error' | translate }}
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.train.field4' | translate }}</mat-label>
+            <input type="number" matInput formControlName="trainEnd">
+            <mat-error *ngIf="(trainFormControl.trainEnd.touched || submitted) && trainFormControl.trainEnd.errors?.required">
+                <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                {{ 'protego.workspace.train.field4.error' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(trainFormControl.trainEnd.touched) && trainFormControl.trainEnd.errors?.notInteger">
+                <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                {{ 'protego.model-form.treb.field9.error' | translate }}
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.train.field5' | translate }}</mat-label>
+            <mat-select formControlName="purgePayloads" required>
+              <mat-option [value]=1>Yes</mat-option>
+              <mat-option [value]=0>No</mat-option>
+            </mat-select>
+            <mat-error *ngIf="(trainFormControl.purgePayloads.touched || submitted) && trainFormControl.purgePayloads.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.workspace.train.field5.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.train.field6' | translate }}</mat-label>
+            <input matInput formControlName="response">
+          </mat-form-field>
+        </form>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="train()" class="protego-save-button" [disabled]="!trainForm.valid" attr.aria-label="{{ 'protego.workspace.train.button1.aria' | translate }}">{{ 'protego.workspace.train.button1' | translate }}</button>
+          <button mat-raised-button color="primary" (click)="clearInput()" class="protego-save-button" [disabled]="isLoading" attr.aria-label="{{ 'protego.workspace.train.button2.aria' | translate }}" style="margin-left: 5px;">{{ 'protego.workspace.train.button2' | translate }}</button>
+        </mat-card-actions>
+        <mat-card-footer>
+          <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+  </div>

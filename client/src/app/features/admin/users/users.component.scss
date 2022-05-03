@@ -1,0 +1,62 @@
+@import '../../../../styles-variables';
+
+.protego-page-container {
+  padding: 2em;
+  width: 60%;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+}
+
+@media (max-width: map-get($grid-breakpoints, lg)) {
+  .protego-page-container {
+    padding: 1em;
+    width: 80%;
+    margin: auto;
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, md)) {
+  .protego-page-container {
+    padding: 1em;
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, sm)) {
+  .protego-page-container {
+    width: 100%;
+    padding: 5px;
+  }
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.protego-table-container {
+  clear: both;
+  width: 100%;
+  min-width: 700px;
+}
+
+@media (max-width: map-get($grid-breakpoints, sm)) {
+  .protego-table-container {
+    min-width: 450px;
+  }
+
+  .mat-column-role {
+    width: 13%;
+  }
+}
+
+.mat-column-role {
+  width: 13%;
+}
+
+::ng-deep .default-theme .mat-select-placeholder {
+  color: black;
+}

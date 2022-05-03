@@ -1,0 +1,98 @@
+@import '../../../../styles-variables';
+
+.protego-page-container {
+  margin: auto;
+}
+
+.protego-section-top {
+  margin-top: 10px;
+}
+
+.protego-section {
+  margin-bottom: 10px;
+}
+
+.protego-table-title {
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+.protego-table {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.protego-arxiv-disclaimer {
+  float: right;
+  font-size: 8pt;
+  margin: 10px;
+}
+
+.protego-float-right {
+  float: right;
+}
+
+.protego-clear-float {
+  clear: both;
+}
+
+.protego-card-header-image {
+  background-size: cover;
+}
+
+.protego-avatar {
+  height: 40px;
+  width: 40px;
+}
+
+.protego-legend {
+  margin-top: 1em;
+}
+
+.draw-canvas {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.protego-icon {
+  vertical-align: middle; 
+  margin-right: 5px;
+}
+
+@media (min-width: map-get($grid-breakpoints, xs)) {
+  .protego-page-container {
+    width: 90%;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, sm)) {
+  .protego-page-container {
+    width: 80%;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, md)) {
+  .protego-page-container {
+    width: 70%;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)) {
+  .protego-page-container {
+    width: 60%;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, xl)) {
+  .protego-page-container {
+    width: 50%;
+  }
+}
+
+.protego-link {
+  cursor: pointer;
+  color: grey;
+}

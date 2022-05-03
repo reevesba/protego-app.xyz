@@ -1,0 +1,92 @@
+<div class="protego-page-container">
+    <mat-card>
+      <h2>{{ 'protego.workspace.test.header' | translate }}</h2>
+      <p><strong>{{ 'protego.test.message1' | translate }}: </strong>{{ 'protego.test.message2' | translate }}.</p>
+        <form class="protego-form" [formGroup]="testForm">
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.test.field1' | translate }}</mat-label>
+            <mat-select formControlName="groupId" (selectionChange)="setModels($event)" required>
+              <mat-option *ngFor="let group of groups" [value]="group.id">
+                {{ group.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="(testFormControl.groupId.touched || submitted) && testFormControl.groupId.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.workspace.test.field1.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.test.field2' | translate }}</mat-label>
+            <mat-select formControlName="modelId" (selectionChange)="resetForm()" required>
+              <mat-option *ngFor="let model of models" [value]="model.id">
+                {{ model.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="(testFormControl.modelId.touched || submitted) && testFormControl.modelId.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.workspace.test.field2.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.test.field3' | translate }}</mat-label>
+            <mat-select formControlName="sampleMode" (selectionChange)="updateSelection($event)" required>
+              <mat-option [value]=0>Single Sample</mat-option>
+              <mat-option [value]=1>Batch</mat-option>
+            </mat-select>
+            <mat-error *ngIf="(testFormControl.sampleMode.touched || submitted) && testFormControl.sampleMode.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.workspace.test.field3.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width" *ngIf="selection === 0">
+            <mat-label>{{ 'protego.workspace.test.field4' | translate }}</mat-label>
+            <input matInput formControlName="sample">
+            <mat-error *ngIf="(testFormControl.sample.touched || submitted) && testFormControl.sample.errors?.required">
+                <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                {{ 'protego.workspace.test.field4.error' | translate }}
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width" *ngIf="selection === 1">
+            <mat-label>{{ 'protego.workspace.test.field5' | translate }}</mat-label>
+            <input type="number" matInput formControlName="testStart">
+              <mat-error *ngIf="(testFormControl.testStart.touched || submitted) && testFormControl.testStart.errors?.required">
+                <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                {{ 'protego.workspace.test.field5.error' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(testFormControl.testStart.touched) && testFormControl.testStart.errors?.notInteger">
+                <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                {{ 'protego.model-form.treb.field9.error' | translate }}
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width" *ngIf="selection === 1">
+            <mat-label>{{ 'protego.workspace.test.field6' | translate }}</mat-label>
+            <input type="number" matInput formControlName="testEnd">
+            <mat-error *ngIf="(testFormControl.testEnd.touched || submitted) && testFormControl.testEnd.errors?.required">
+                <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                {{ 'protego.workspace.test.field6.error' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(testFormControl.testEnd.touched) && testFormControl.testEnd.errors?.notInteger">
+                <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                {{ 'protego.model-form.treb.field9.error' | translate }}
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.workspace.test.field7' | translate }}</mat-label>
+            <input matInput formControlName="response">
+          </mat-form-field>
+        </form>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="test()" class="protego-save-button" [disabled]="!testForm.valid" attr.aria-label="{{ 'protego.workspace.test.button1.aria' | translate }}">{{ 'protego.workspace.test.button1' | translate }}</button>
+          <button mat-raised-button color="primary" (click)="clearInput()" class="protego-save-button" [disabled]="isLoading" attr.aria-label="{{ 'protego.workspace.test.button2.aria' | translate }}" style="margin-left: 5px;">{{ 'protego.workspace.test.button2' | translate }}</button>
+        </mat-card-actions>
+        <mat-card-footer>
+          <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+        </mat-card-footer>
+      </mat-card>
+  </div>

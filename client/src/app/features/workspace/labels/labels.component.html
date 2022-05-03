@@ -1,0 +1,133 @@
+<div class="protego-page-container">
+    <h2>{{ 'protego.workspace.menu.label' | translate }}</h2>
+    <p>{{ 'protego.payload.info' | translate }}</p>
+
+    <mat-divider class="protego-divider"></mat-divider>
+
+    <div style="float: left; margin-top: 3em;">
+        <h3>Group {{ currentGroupName }} ({{ totalRows }})</h3>
+    </div>
+
+    <div style="clear: both;"  *ngIf="selection.selected.length > 0"></div>
+
+    <div style="float: left;" *ngIf="selection.selected.length > 0" class="protego-bulk-ops">
+        <h6 style="margin: 5px;">{{ 'protego.labels.bulk' | translate }}</h6>
+        <button style="float: left;" mat-button (click)="openBulkActionDialog('Update')" mat-raised-button color="primary" attr.aria-label="{{ 'protego.api-tokens.aria1' | translate }}">
+            {{ 'protego.payload.button1' | translate }}
+        </button>
+        <button style="float: left;" mat-button (click)="openBulkActionDialog('Delete')" mat-raised-button color="warn" attr.aria-label="{{ 'protego.api-tokens.aria2' | translate }}">
+            <mat-icon>delete_forever</mat-icon>
+        </button>
+    </div>
+
+    <mat-form-field style="float: right;" class="protego-padding-top">
+        <mat-label>{{ 'protego.group-members.select-label' | translate }}</mat-label>
+        <mat-select #select (selectionChange)="groupFieldChange($event.source.value)" [(value)]="currentGroup">
+            <mat-option *ngFor="let group of groups" [value]="group.id" role="option">
+                {{ group.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="protego-table-container mat-elevation-z8">
+        <table mat-table #payloadTable [dataSource]="payloadDataSource" matSort>
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && (isAllSelected() || isAnySelected())"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- id column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.payload.id' | translate }} </th>
+                <td mat-cell *matCellDef="let payload"> {{ payload.id }} </td>
+            </ng-container>
+
+            <!-- payload column -->
+            <ng-container matColumnDef="payload">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.payload.payload' | translate }} </th>
+                <td mat-cell *matCellDef="let payload" class="protego-max-column"> {{ payload.payload }} </td>
+            </ng-container>
+
+            <!-- group_id column -->
+            <ng-container matColumnDef="group_id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.payload.group-id' | translate }} </th>
+                <td mat-cell *matCellDef="let payload"> {{ payload.group_id }} </td>
+            </ng-container>
+
+            <!-- classification column -->
+            <ng-container matColumnDef="classification">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.payload.classification' | translate }} </th>
+                <td mat-cell *matCellDef="let payload"> {{ payload.classification }} </td>
+            </ng-container>
+
+            <!-- active column -->
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.payload.active' | translate }} </th>
+                <td mat-cell *matCellDef="let payload"> {{ payload.active }} </td>
+            </ng-container>
+
+            <!-- created at column -->
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.payload.created.at' | translate }} </th>
+                <td mat-cell *matCellDef="let payload"> {{ payload.created_at }} </td>
+            </ng-container>
+
+            <!-- created by column -->
+            <ng-container matColumnDef="created_by">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.payload.created.by' | translate }} </th>
+                <td mat-cell *matCellDef="let payload"> {{ payload.created_by }} </td>
+            </ng-container>
+
+            <!-- updated at column -->
+            <ng-container matColumnDef="updated_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.payload.updated.at' | translate }} </th>
+                <td mat-cell *matCellDef="let payload"> {{ payload.updated_at }} </td>
+            </ng-container>
+
+            <!-- last updated by column -->
+            <ng-container matColumnDef="updated_by">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.payload.updated.by' | translate }} </th>
+                <td mat-cell *matCellDef="let payload"> {{ payload.updated_by }} </td>
+            </ng-container>
+
+            <!-- action column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="protego-fixed-column"> {{ 'protego.payload.action' | translate }} </th>
+                <td mat-cell *matCellDef="let element" class="action-link"> 
+                    <button mat-button *ngIf="element.id != null" (click)="openPayloadDialog('Update', element)" mat-raised-button color="primary" attr.aria-label="{{ 'protego.payload.aria3' | translate }}">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-button *ngIf="element.id != null" (click)="openPayloadDialog('Delete', element)" mat-raised-button color="warn" attr.aria-label="{{ 'protego.payload.aria4' | translate }}">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button>  
+                </td>
+            </ng-container>
+
+            <!-- header row -->
+            <tr mat-header-row *matHeaderRowDef="payloadColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: payloadColumns;"></tr>
+
+            <!-- row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="7">{{ 'protego.payload.empty' | translate }}. <span *ngIf="currentGroup">{{ 'protego.labels.load1' | translate }} <a href="javascript:void(0);" (click)="loadPayloads()">{{ 'protego.labels.load2' | translate }}</a>.</span></td>
+        </table>
+
+        <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+
+        <mat-paginator #paginator [length]="totalRows" [pageIndex]="pageIndex" [pageSize]="pageSize" showFirstLastButtons
+            [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+        </mat-paginator>
+    </div>
+</div>

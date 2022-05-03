@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-seed": {
+    "protego": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -19,10 +19,11 @@
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
+              "src/assets/i18n",
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -31,13 +32,12 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "10kb"
                 }
               ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -49,24 +49,43 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
+            },
+            "development": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kb"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-seed:build"
+            "browserTarget": "protego:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-seed:build:production"
+              "browserTarget": "protego:build:production"
+            },
+            "development": {
+              "browserTarget": "protego:build:development"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-seed:build"
+            "browserTarget": "protego:build"
           }
         },
         "test": {
@@ -78,7 +97,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "assets": [
               "src/assets",
@@ -100,7 +119,7 @@
         }
       }
     },
-    "angular-seed-e2e": {
+    "protego-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -109,7 +128,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "angular-seed:serve"
+            "devServerTarget": "protego:serve"
           }
         },
         "lint": {
@@ -126,11 +145,11 @@
       }
     }
   },
-  "defaultProject": "angular-seed",
+  "defaultProject": "protego",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "style": "css"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

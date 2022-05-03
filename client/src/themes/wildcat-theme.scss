@@ -1,0 +1,75 @@
+$protego-crimson: (
+  50 : #f4e2e6,
+  100 : #e3b7c2,
+  200 : #d18799,
+  300 : #CC1540,
+  400 : #b13351,
+  500 : #a30f32,
+  600 : #9b0d2d,
+  700 : #8B0025,
+  800 : #88081f,
+  900 : #770413,
+  A100 : #ffa5ad,
+  A200 : #ff727e,
+  A400 : #ff3f50,
+  A700 : #ff2538,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff
+  )
+);
+
+$protego-gray: (
+  50 : #f7f7f7,
+  100 : #ececec,
+  200 : #dfdfdf,
+  300 : #d2d2d2,
+  400 : #c9c9c9,
+  500 : #bfbfbf,
+  600 : #b9b9b9,
+  700 : #b1b1b1,
+  800 : #a9a9a9,
+  900 : #9b9b9b,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffdada,
+  A700 : #ffc0c0,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000
+  )
+);
+
+$protego-wildcat-primary: mat-palette($protego-crimson, 500, 300, 700);
+$protego-wildcat-accent: mat-palette($protego-gray, 500, 300, 700);
+$protego-wildcat-warn: mat-palette($mat-red, 500);
+
+$protego-wildcat-theme: mat-dark-theme(
+  $protego-wildcat-primary,
+  $protego-wildcat-accent,
+  $protego-wildcat-warn
+);

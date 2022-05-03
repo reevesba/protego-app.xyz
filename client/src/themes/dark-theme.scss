@@ -1,0 +1,9 @@
+$protego-black-primary: mat-palette($mat-grey, 700, 500, 900);
+$protego-black-accent: mat-palette($mat-blue-grey, 500, 300, 700);
+$protego-black-warn: mat-palette($mat-red, 500);
+
+$protego-dark-theme: mat-dark-theme(
+  $protego-black-primary,
+  $protego-black-accent,
+  $protego-black-warn
+);

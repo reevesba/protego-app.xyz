@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'styles-variables';
+
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import 'styles-reset';
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+@import './themes/default-theme';
+@import './themes/light-theme';
+@import './themes/dark-theme';
+@import './themes/nature-theme';
+@import './themes/wildcat-theme';
+
+@import 'styles-reset.scss-theme';
+@import './app/app/app.component.scss-theme';
+@import './app/shared/big-input/big-input/big-input.component.scss-theme';
+@import './app/features/workspace/workspace/workspace.component.scss-theme';
+@import './app/features//workspace//docs/docs.component.scss-theme.scss';
+@import './app/features/home/home/home.component.scss-theme';
+
+@mixin custom-components-theme($theme) {
+  @include protego-styles-reset-theme($theme);
+  @include protego-app-component-theme($theme);
+  @include protego-workspace-component-theme($theme);
+  @include protego-big-input-component-theme($theme);
+  @include protego-home-component-theme($theme);
+  @include protego-doc-component-theme($theme);
+}
+
+.default-theme {
+  @include angular-material-theme($protego-theme);
+  @include custom-components-theme($protego-theme);
+}
+
+.light-theme {
+  @include angular-material-theme($protego-light-theme);
+  @include custom-components-theme($protego-light-theme);
+}
+
+.dark-theme {
+  @include angular-material-theme($protego-dark-theme);
+  @include custom-components-theme($protego-dark-theme);
+}
+
+.nature-theme {
+  @include angular-material-theme($protego-nature-theme);
+  @include custom-components-theme($protego-nature-theme);
+}
+
+.wildcat-theme {
+  @include angular-material-theme($protego-wildcat-theme);
+  @include custom-components-theme($protego-wildcat-theme);
+}
+
+body {
+    margin: 0;
+}

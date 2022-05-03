@@ -1,0 +1,21 @@
+<div class="protego-page-container">
+  <mat-card *ngIf="!(isConfirmed$ | async) && username" style="margin-top: 0.5em;">
+    <mat-card-content>
+      <b>{{ 'protego.confirm-email.message1' | translate }}</b>: {{ 'protego.confirm-email.message2' | translate }} <a (click)="resendEmail()" class="protego-link">{{ 'protego.confirm-email.message3' | translate }}</a> {{ 'protego.confirm-email.message4' | translate }}.
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-progress-bar *ngIf="loading" mode='query'></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+
+  <!-- Introduction -->
+  <mat-card class="protego-section protego-section-top">
+    <mat-card-content>
+      <h4 style="text-align: center;"><strong>{{ 'protego.home.header' | translate }}</strong></h4>
+      <h5 style="text-align: center;"><em>{{ 'protego.home.subheader' | translate }}</em></h5>
+
+      <h5 style="padding-top: 2em;">{{ 'protego.home.p-header' | translate }}</h5>
+      <p>{{ 'protego.home.p' | translate }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

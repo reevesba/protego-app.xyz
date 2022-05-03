@@ -1,32 +1,29 @@
-# -*- coding: utf-8 -*-
-"""
+# coding=utf-8
 
+'''
 This module provides base classes to build Service layer and expose API
 that interacts with db Models.
+BaseService: An abstract base class with abstract methods.
+SQLAlchemyService: A SQLAlchemy service class that extends the BaseClass.
+'''
 
-BaseService - An abstract base class with abstract methods.
-SQLAlchemyService - A SQLAlchemy service class that extends the BaseClass.
-
-"""
 from abc import ABCMeta, abstractmethod
-
 from flask import jsonify
+from server.main import db
 
 
 class BaseService(object):
-    """An abstract `Base Class` that encapsulates common database model operations."""
     __metaclass__ = ABCMeta
     __model__ = None
 
-
     def _isinstance(self, obj, raise_error=True):
-        """Checks if the specified object matches the service's model.
+        ''' Checks if the specified object matches the service's model.
+            By default this method will raise a 'ValueError' if the
+            model is not the expected type.
 
-        By default this method will raise a `ValueError` if the model is not the expected type.
-        :param obj: the object to check
-        :param raise_error: flag to raise an error on a mismatch
-
-        """
+            :param obj: the object to check
+            :param raise_error: flag to raise an error on a mismatch
+        '''
         rv = isinstance(obj, self.__model__)
         if not rv and raise_error:
             raise ValueError('%s is not of type %s' % (obj, self.__model__))
@@ -34,40 +31,38 @@ class BaseService(object):
 
     @abstractmethod
     def save(self, obj):
-        """
-            Commits the object to the database and returns the object.
-        """
+        ''' Commits the object to the database and returns the object.
+        '''
+
+    @abstractmethod
+    def save_bulk(self, obj):
+        ''' Commits objects to the database and returns the objects.
+        '''
 
     @abstractmethod
     def all(self):
-        """
-            Returns a generator containing all instances of model.
-        """
+        ''' Returns a generator containing all instances of model.
+        '''
 
     @abstractmethod
     def get(self, obj):
-        """
-            Returns an instance of the service's model with the specified id.
-        """
+        ''' Returns an instance of the service's model with the specified id.
+        '''
 
     @abstractmethod
     def get_all(self, *ids):
-        """
-            Returns a list of instances of the service's model with the
+        ''' Returns a list of instances of the service's model with the
             specified ids.
             :param *ids: instance ids
-        """
+        '''
 
 
 class SQLAlchemyService(BaseService):
-    """
+    ''' A 'Service' instance that encapsulates common SQLAlchemy model
+        operations in the context of a 'Flask' application.
+    '''
 
-        A `Service` instance that encapsulates common SQLAlchemy model
-        operations in the context of a `Flask` application.
-
-    """
-
-    __db__ = None
+    __db__ = db
 
     def save(self, obj):
         self._isinstance(obj)
@@ -75,15 +70,27 @@ class SQLAlchemyService(BaseService):
         self.__db__.session.commit()
         return obj
 
+    def save_bulk(self, objs):
+        self.__db__.session.bulk_save_objects(objs)
+        self.__db__.session.commit()
+        return objs
+
+    def delete(self, obj):
+        self.__db__.session.delete(obj)
+        self.__db__.session.commit()
+        return '', 201
+
     def all(self):
         data = self.__model__.query.all()
         return self.return_response(data)
 
     def get(self, id):
-        return self.__model__.query.get(id)
+        data = self.__model__.query.get(id)
+        return jsonify(data.as_dict())
 
-    def get_all(self, *ids):
-        return self.__model__.query.filter(self.__model__.id.in_(ids)).all()
+    def get_all(self, ids):
+        data = self.__model__.query.filter(self.__model__.id.in_(ids)).all()
+        return self.return_response(data)
 
     def return_response(self, data):
         data_dict = [row.as_dict() for row in data]

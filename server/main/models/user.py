@@ -1,50 +1,51 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 
-from sqlalchemy import inspect
-
-from server.main import db
-from sqlalchemy.sql import func
-
-
-class BaseModel(db.Model):
-    """Base data model for all objects"""
-    __abstract__ = True
-
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def __repr__(self):
-        """Define a base way to print models"""
-        return '%s(%s)' % (self.__class__.__name__, {
-            column: value
-            for column, value in self.as_dict().items()
-        })
-
-    # def _as_dict(self):
-    #     return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
-    # Preferred way
-    # https://stackoverflow.com/questions/1958219/convert-sqlalchemy-row-object-to-python-dict
-    def as_dict(self):
-        return {c.key: getattr(self, c.key)
-                for c in inspect(self).mapper.column_attrs}
+from sqlalchemy import Column, String, DateTime
+from .entity import Entity
+from marshmallow import Schema, fields
+from server.main import db, bcrypt
 
 
-class User(BaseModel, db.Model):
-    """Model for users table"""
-    __tablename__ = "users"
+class User(Entity, db.Model):
+    __tablename__ = "user_account"
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(128), nullable=False)
-    email = db.Column(db.String(128), nullable=False)
-    password = db.Column(db.String(128), nullable=False)
-    active = db.Column(db.Boolean(), default=True, nullable=False)
-    # using func.now(), so time is calculated by the DB server and not by app server.
-    # https://stackoverflow.com/questions/13370317/sqlalchemy-default-datetime?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
-    created_date = db.Column(db.DateTime, nullable=False, default=func.now())
+    # user authentication information
+    email = Column(String(255), nullable=False, unique=True)
+    email_confirmed_at = Column(DateTime())
+    password = Column(String(255), nullable=False, server_default='')
 
-    def __init__(self, username, email, password):
-        super().__init__()
-        self.username = username
+    # user information
+    first_name = Column(String(100), nullable=False, server_default='')
+    last_name = Column(String(100), nullable=False, server_default='')
+    username = Column(String(128), nullable=False, unique=True)
+    photo_url = Column(String())
+
+    # define relationships to role
+    roles = db.relationship('Role', secondary='user_role', lazy='dynamic')
+
+    def __init__(self, email, email_confirmed_at, password,
+                 first_name, last_name, username, photo_url, created_by):
+        Entity.__init__(self, created_by)
         self.email = email
-        self.password = password
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+        self.email_confirmed_at = email_confirmed_at
+        self.first_name = first_name
+        self.last_name = last_name
+        self.username = username
+        self.photo_url = photo_url
+
+
+class UserSchema(Schema):
+    id = fields.Number()
+    active = fields.Boolean()
+    email = fields.Str()
+    email_confirmed_at = fields.DateTime()
+    password = fields.Str()
+    first_name = fields.Str()
+    last_name = fields.Str()
+    username = fields.Str()
+    photo_url = fields.Str()
+    created_at = fields.DateTime()
+    created_by = fields.Str()
+    updated_at = fields.DateTime()
+    updated_by = fields.Str()

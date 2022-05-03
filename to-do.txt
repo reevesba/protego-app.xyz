@@ -1,0 +1,40 @@
+To-do
+-----
+* deploy to DO - Docker 19.03.12 on Ubuntu 20.04
+* run certbot
+
+Complete
+--------
+* Add support for the 11 remaining models
+* Turn on cascading for groups
+    * If group deleted, delete members, models, data, api tokens
+* put all da loading bars in models inside cards
+* Search for any not translate text values and do translations
+* change email urls
+* ensure api endpoints are secure, especially the model api. For example, don't let people
+    create models in groups they are not a part of
+* groups auth seems to be okay, but authenticated users can select other users data, really need to harden my endpoints
+    maybe try updating the requires auth decorator
+* build public api (with token of course) and throw in some api documentation
+* do documentation component
+* search for any hardcoded 'localhost' or 'localhost:4200' and update for prd
+* run translate python script
+
+On Hold
+-------
+* Cascading is slow due to payloads, try  deleting them directly in api instead of cascade
+
+Dev Notes
+---------
+Launch Backend:
+$ docker-compose build
+$ docker-compose up
+
+Launch Frontend:
+$ ng serve --poll 500 --configuration development
+
+Publish to TestPyPI:
+Delete, dist and egg then increment the version in setup.py
+$ python3 -m build
+$ python3 -m twine upload --repository testpypi dist/*
+    - username is __token__, password is token value

@@ -1,0 +1,30 @@
+.protego-page-container {
+  min-width: 150px;
+  max-width: 650px;
+  width: 90%;
+  margin: auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+  
+.protego-full-width {
+  width: 100%;
+}
+
+.protego-save-button {
+  margin-top: 1em;
+}
+
+mat-form-field {
+  margin-bottom: 0.5em;
+}
+
+.protego-button {
+  background-color: transparent;
+  padding: 0;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+}

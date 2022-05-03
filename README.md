@@ -1,145 +1,253 @@
-# Angular-Flask-Docker-Skeleton v2.0.3
+<div id="top"></div>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-### Simple Angular-Flask-PostgreSQL seed project with Docker.
 
-This is a simple Angular-Flask web application skeleton project with following key
-features:
 
-- The project structure supports multiple development environments with the usage of `.env`
-  variable and `docker.compose.yml` files.
-- Designed for organizing large scale application structure. With the usage of `Blueprints`,
-  `application factory` and different configs, you can easily extend this seed project to any
-  Production ready application.
-- `Service` Class that encapsulates common SQLAlchemy operations to interact with data model by
-  exposing APIs.
-- Support Flask code Testing out of the box. For commands to test, see below.
-- Complete `PostgreSQL` database support with sample db, model and dummy data examples included in
-  the project.
-- Reverse proxy using `nginx`.
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-It is built with following components:
 
-- Angular (v9) - Frontend framework.
-- Flask(1.1.2) - Micro web framework (Python-3.6.2) for the backend.
-- PostgreSQL - Database support.
-- Flask-SQLAlchemy - Flask based ORM wrapper on SQLAlchemy.
-- nginx - web server (It's also used for reverse proxy). External user hits the nginx which distributes the request between Frontend and Backend using url.
-- uwsgi - It's a WSGI server that help running web application written in Python. It comes with direct support for popular NGINX web server.
-- Docker - Usage of Docker Compose to build and host the application.
 
-> NOTE: I have tagged this project at each release. So please refer to previous tags if you
-> are looking for a simpler version of this seed project. For e.g., If you want to use
-> the seed project without database support please refer to [v1.0.0](https://github.com/mrsan22/Angular-Flask-Docker-Skeleton/tree/v1.0.0) of
-> the project under tags. Also refer [Changelog](https://github.com/mrsan22/Angular-Flask-Docker-Skeleton/blob/master/CHANGELOG.md) file for latest changes.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-## Project Components (Directory Structure)
+  <h3 align="center">Best-README-Template</h3>
 
-### client
+  <p align="center">
+    An awesome README template to jumpstart your projects!
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+  </p>
+</div>
 
-This directory holds the Angular code.
 
-### nginx
 
-This directory holds the nginx config file and Dockerfile for running the nginx container. This container serves the Angular code and also passes request to backend.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-### postgresql
 
-This directory holds the Dockerfile for running PostgreSQL database. It also contains `init.sql`
-script to create a sample database when postres docker container initializes.
 
-### server
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-This directory contains the server side code. It hosts the **Flask** app, **tests** setup and
-other configs and settings files required by the backend. It also has Dockerfile for running the
-flask container. This container hosts the backend code.
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-### Environment variable
+There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
-A simple `.env` file to set the environment variables for Flask and Postgres. We can have multiple
-versions of this file for different environments.
+Here's why:
+* Your time should be focused on creating something amazing. A project that solves a problem and helps others
+* You shouldn't be doing the same tasks over and over like creating a README from scratch
+* You should implement DRY principles to the rest of your life :smile:
 
-### docker-compose.yml
+Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
 
-This file is used by the Docker to create the containers and run your app. We can have multiple
-versions of this file for different environments.
+Use the `BLANK_README.md` to get started.
 
-## Architecture
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-For this seed project, I am using 3 Docker containers:
 
-- NGINX - Web Server
-- FLASK - Flask web application with _uwsgi_ server.
-- PostgreSQL - Database.
 
-The three components are all created from Docker images that expand on the respective official
-images from Docker Hub. Each of these images are built using separate Dockerfiles. Docker Compose
-is then used to create all three containers and connect them correctly into a unified application.
+### Built With
 
-### Working
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-The request from an external user hits the _nginx_ web server on port 80. Depending on the
-**URL**,the request is served using Angular code or it is sent to Flask web application. In this
-app, all request URL starting with _/api_ is sent to Flask web service. The Flask docker
-container is also running and it exposes port 5000. These setting are defined in _nginx.conf_
-file. In this way, nginx is aware of both Frontend and Backend services. The Flask container
-talks to the PostgreSQL database on port 5432 for any request that require database operations.
+* [Next.js](https://nextjs.org/)
+* [React.js](https://reactjs.org/)
+* [Vue.js](https://vuejs.org/)
+* [Angular](https://angular.io/)
+* [Svelte](https://svelte.dev/)
+* [Laravel](https://laravel.com)
+* [Bootstrap](https://getbootstrap.com)
+* [JQuery](https://jquery.com)
 
-### Basic Architecture Diagram
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-![project architecture](https://github.com/mrsan22/Angular-Flask-Docker-Skeleton/blob/master/project_architecture.png)
 
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```js
+   const API_KEY = 'ENTER YOUR API';
+   ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
 ## Usage
 
-**NOTE**: Make sure you have Docker, node, npm and angular-cli installed. Check Angular
-Prerequisites [here](https://github.com/angular/angular-cli#prerequisites).
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-- Clone this repository
-- **Not Required** - Navigate to client directory and execute `ng build --prod` to create production build for Angular.
-- Then navigate back and execute following commands:
-  - `docker-compose build`
-  - `docker-compose up`
-  - _OR_ just run one command: `docker-compose -f docker-compose.yml up --build`
-- Open Browser and type following URL:
-- `localhost` - It should display the Welcome message from Angular and a default message from
-  backend.
-- `localhost/api` - It should display welcome message from Flask.
-- `localhost/api/ping` - To get a `json` from Flask.
-- `http://localhost/api/users` - Fetches all users from `users` table.
+_For more examples, please refer to the [Documentation](https://example.com)_
 
-This seed project is good for starting up with any Angular-Flask-Docker project, so check it out and feel free to fork, update, plug in your project etc. Let me know if you find any issues.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-## Working with PostgreSQL
 
-- Check to see if `postgres` is running on port `5432`:
-  - Run: `nc -zv localhost 5432`
-  - Correct Output: `Connection to localhost port 5432 [tcp/postgresql] succeeded!`
-  - If you see above output, everything is good
-- To log into the container running Postgres:
-  - check docker running processes: `docker ps -a`
-  - Find out the **container_id** of the Postgres database and run: `docker exec -it <container_id> bash`
-  - You should now be in postgres docker container terminal:
-  - Open PostgreSQL command line by running `psql -U <database_username>`.
-    - For this project, run: `psql -U postgres`
-  ```
-    root@0dffa1473a46:/# psql -U postgres
-    psql (9.6.9)
-    Type "help" for help.
-    postgres=#
-  ```
-  - `\l` - show all databases
-  - `\c users_dev` - connect to `users_dev` database.
-  - `\dt` - shows list of tables in the selected database
-  - check data: `SELECT * FROM users;`
 
-## Running Python Tests:
+<!-- ROADMAP -->
+## Roadmap
 
-- All Flask/Python unit tests resides inside the `server/tests` directory and managed by `manage .py` Python file.
-- Run the sample tests using following command:
-  - `docker-compose -f docker-compose.yml run --rm flask_demo python manage.py test`
+- [x] Add Changelog
+- [x] Add back to top links
+- [ ] Add Additional Templates w/ Examples
+- [ ] Add "components" document to easily copy & paste sections of the readme
+- [ ] Multi-language Support
+    - [ ] Chinese
+    - [ ] Spanish
 
-### References/Credits
+See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
-I refered a lot of online blogs, github repos and stackoverflow questions, while I was working on to create this project. A big Thank You to all these people who take time from their regular work and write Blog, answers questions and post their code online, so that someone like me could learn from those posts and come up with something of their own. Special mention for these blog posts.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-- [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04)
-- [Patrick Software Blog](http://www.patricksoftwareblog.com/how-to-use-docker-and-docker-compose-to-create-a-flask-application/)
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+
+Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+
+* [Choose an Open Source License](https://choosealicense.com)
+* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
+* [Malven's Grid Cheatsheet](https://grid.malven.co/)
+* [Img Shields](https://shields.io)
+* [GitHub Pages](https://pages.github.com)
+* [Font Awesome](https://fontawesome.com)
+* [React Icons](https://react-icons.github.io/react-icons/search)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png

@@ -1,0 +1,37 @@
+<div class='protego-page-container'>
+    <mat-card class="protego-login-form">
+        <form class="protego-form" [formGroup]="loginForm">
+            <mat-card-title>{{ 'protego.login.login' | translate }}</mat-card-title>
+            <mat-card-content>
+                <mat-form-field class="protego-full-width">
+                    <input matInput type="text" placeholder="{{ 'protego.login.email' | translate }}" formControlName="email" required>
+                    <mat-hint align="end"></mat-hint>
+                    <mat-error *ngIf="(loginFormControl.email.touched || submitted) && loginFormControl.email.errors?.required">
+                        <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                        {{ 'protego.login.email.warn1' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="(loginFormControl.email.touched || submitted) &&loginFormControl. email.errors?.email">
+                        <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                        {{ 'protego.login.email.warn2' | translate }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="protego-full-width">
+                    <input matInput [type]="hide?'password':'text'" placeholder="{{ 'protego.login.password' | translate }}" formControlName="password" required>
+                    <mat-hint align="end"><a [routerLink]="['/login/forgot-password']">{{ 'protego.login.forgot.password' | translate }}</a></mat-hint>
+                    <mat-error *ngIf="(loginFormControl.password.touched || submitted) && loginFormControl.password.errors?.required">
+                        <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+                        {{ 'protego.login.required' | translate }}
+                    </mat-error>
+                    <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer;">{{hide?'visibility_off':'visibility'}}</mat-icon>
+                </mat-form-field>
+            </mat-card-content>
+        </form>
+        <div class="protego-recaptcha">
+            <re-captcha (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled" siteKey="{{ siteKey }}"></re-captcha>
+        </div>
+        <mat-card-actions>
+            <button type="submit" mat-raised-button (click)="onLogin()" color="primary" [disabled]="!loginForm.valid || !recaptchaComplete" class="protego-button" attr.aria-label="{{ 'protego.login.aria' | translate }}">{{ 'protego.login.login' | translate }}</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

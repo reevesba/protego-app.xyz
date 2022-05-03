@@ -1,0 +1,84 @@
+
+@import '../../../../styles-variables';
+
+.protego-page-container {
+  padding: 2em;
+  width: 60%;
+  margin: auto;
+}
+
+@media (max-width: map-get($grid-breakpoints, md)) {
+  .protego-page-container {
+    width: 100%;
+    padding: 1em;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.protego-table-container {
+  clear: both;
+  width: 100%;
+  min-width: 700px;
+}
+
+@media (max-width: map-get($grid-breakpoints, sm)) {
+  .protego-table-container {
+    min-width: 450px;
+  }
+}
+
+button {
+  margin: 5px;
+}
+
+.protego-fixed-column {
+  width: 200px;
+}
+
+.protego-max-column {
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 150px;
+  padding-right: 1em;
+}
+
+.protego-float-left {
+  padding-top: 2em;
+  float: left;
+}
+
+.protego-clear {
+  padding-top: 2em;
+  clear: all;
+}
+
+.protego-padding-top {
+  padding-top: 2em;
+}
+
+.protego-clear-padding {
+  padding-top: 0;
+}
+
+.protego-divider {
+  margin-top: 2em;
+  border-top-width: 2px;
+}
+
+.action-link.button {
+  transform: scale(0.9);
+}
+
+.protego-bulk-ops {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 206px;
+  overflow: auto;
+}

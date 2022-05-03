@@ -1,0 +1,123 @@
+<div class="protego-page-container">
+  <mat-card>
+    <h2 style="float: left;">{{ 'protego.model-form.logo.header' | translate }}</h2>
+    <a style="float: right;" href="https://riverml.xyz/latest/api/linear-model/LogisticRegression/" target="_blank">
+      <mat-icon>help_outline</mat-icon>
+    </a>
+      <form class="protego-form" [formGroup]="modelForm">
+        <!-- name -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.logo.name' | translate }}</mat-label>
+          <input matInput formControlName="name">
+          <mat-hint align="end">{{ 'protego.model-form.logo.name.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.name.touched) && modelFormControl.name.errors?.required">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.logo.name.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- optimizer -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.logo.field1' | translate }}</mat-label>
+          <mat-select formControlName="optimizer">
+            <mat-option *ngFor="let optimizer of optimizers" [value]="optimizer.value">
+              {{ optimizer.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- loss -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.logo.field2' | translate }}</mat-label>
+          <mat-select formControlName="loss">
+            <mat-option *ngFor="let loss of losses" [value]="loss.value">
+              {{ loss.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- l2 -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.logo.field3' | translate }}</mat-label>
+          <input type="number" matInput formControlName="l2">
+          <mat-hint align="end">{{ 'protego.model-form.logo.field3.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.l2.touched) && modelFormControl.l2.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.logo.field3.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- intercept_init -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.logo.field4' | translate }}</mat-label>
+          <input type="number" matInput formControlName="intercept_init">
+          <mat-hint align="end">{{ 'protego.model-form.logo.field4.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.intercept_init.touched) && modelFormControl.intercept_init.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.logo.field4.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- intercept_lr_select -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.logo.field5' | translate }}</mat-label>
+          <mat-select formControlName="intercept_lr_select" (selectionChange)="setSelect($event)">
+            <mat-option value="0">{{ 'protego.model-form.logo.field5.option1' | translate }}</mat-option>
+            <mat-option value="1">{{ 'protego.model-form.logo.field5.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- intercept_lr_float -->
+        <mat-form-field class="protego-full-width" style="padding-left: 1em;" *ngIf="lr_select.value == 0">
+          <mat-label>{{ 'protego.model-form.logo.field6' | translate }}</mat-label>
+          <input type="number" matInput formControlName="intercept_lr_float">
+          <mat-hint align="end">{{ 'protego.model-form.logo.field6.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.intercept_lr_float.touched) && modelFormControl.intercept_lr_float.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.logo.field6.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- intercept_lr_schdlr -->
+        <mat-form-field class="protego-full-width" style="padding-left: 1em;" *ngIf="lr_select.value == 1">
+          <mat-label>{{ 'protego.model-form.logo.field7' | translate }}</mat-label>
+          <mat-select formControlName="intercept_lr_schdlr">
+            <mat-option *ngFor="let scheduler of schedulers" [value]="scheduler.value">
+              {{ scheduler.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- clip_gradient -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.logo.field8' | translate }}</mat-label>
+          <input type="number" matInput formControlName="clip_gradient">
+          <mat-hint align="end">{{ 'protego.model-form.logo.field8.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.clip_gradient.touched) && modelFormControl.clip_gradient.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.logo.field8.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- initializer -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.logo.field9' | translate }}</mat-label>
+          <mat-select formControlName="initializer">
+            <mat-option *ngFor="let initializer of initializers" [value]="initializer.value">
+              {{ initializer.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="saveModel()" class="protego-save-button" [disabled]="!modelForm.valid" attr.aria-label="{{ 'protego.model-form.button1.aria' | translate }}">{{ 'protego.model-form.button1' | translate }}</button>
+      </mat-card-actions>
+      <mat-card-footer>
+        <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+      </mat-card-footer>
+  </mat-card>
+  <mat-card *ngIf="errorMsg" style="margin-top: 0.5em; border: 1px solid red;">
+    <h6>{{ 'protego.error' | translate }}:</h6>
+    <p>{{ errorMsg }}</p>
+  </mat-card>
+</div>

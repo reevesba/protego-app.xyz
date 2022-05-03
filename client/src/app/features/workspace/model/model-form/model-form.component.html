@@ -1,0 +1,33 @@
+<div class="protego-page-container">
+    <mat-card>
+      <h2>{{ 'protego.model-form.header' | translate }}</h2>
+        <form class="protego-form" [formGroup]="modelForm">
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.paradigm' | translate }}</mat-label>
+            <mat-select formControlName="paradigm" (selectionChange)="setAlgorithms($event)" required>
+              <mat-option *ngFor="let paradigm of paradigms" [value]="paradigm.value">
+                {{ paradigm.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="(modelFormControl.paradigm.touched || submitted) && modelFormControl.paradigm.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.paradigm.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.algorithm' | translate }}</mat-label>
+            <mat-select formControlName="algorithm" (selectionChange)="setRouting($event)" required>
+              <mat-option *ngFor="let algorithm of algorithms" [value]="algorithm.value">
+                {{ algorithm.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="(modelFormControl.algorithm.touched || submitted) && modelFormControl.algorithm.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.algorithm.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </form>
+        <button mat-raised-button color="primary" [routerLink]="[routing, groupId]" class="protego-save-button" [disabled]="!modelForm.valid" attr.aria-label="save">{{ 'protego.next' | translate }}</button>
+    </mat-card>
+  </div>

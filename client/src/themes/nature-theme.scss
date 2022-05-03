@@ -1,0 +1,9 @@
+$protego-nature-primary: mat-palette($mat-brown, 700, 300, 900);
+$protego-nature-accent: mat-palette($mat-cyan, 300);
+$protego-nature-warn: mat-palette($mat-red, 600);
+
+$protego-nature-theme: mat-light-theme(
+  $protego-nature-primary,
+  $protego-nature-accent,
+  $protego-nature-warn
+);

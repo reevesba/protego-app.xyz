@@ -1,0 +1,230 @@
+<div class="protego-page-container">
+    <mat-card>
+      <h2 style="float: left;">{{ 'protego.model-form.perb.header' | translate }}</h2>
+      <a style="float: right;" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Perceptron.html" target="_blank">
+        <mat-icon>help_outline</mat-icon>
+      </a>
+        <form class="protego-form" [formGroup]="modelForm">
+          <!-- name -->
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.perb.name' | translate }}</mat-label>
+            <input matInput formControlName="name">
+            <mat-hint align="end">{{ 'protego.model-form.perb.name.hint' | translate }}</mat-hint>
+            <mat-error *ngIf="(modelFormControl.name.touched) && modelFormControl.name.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.perb.name.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+        <!-- penalty -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field1' | translate }}</mat-label>
+          <mat-select formControlName="penalty" (selectionChange)="resetL1Ratio()">
+            <mat-option *ngFor="let penalty of penalties" [value]="penalty.value">
+              {{ penalty.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- alpha -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field2' | translate }}</mat-label>
+          <input type="number" matInput formControlName="alpha">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field2.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.alpha.touched) && modelFormControl.alpha.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field2.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- l1_ratio -->
+        <mat-form-field class="protego-full-width" *ngIf="penalty.value == 'elasticnet'">
+          <mat-label>{{ 'protego.model-form.perb.field3' | translate }}</mat-label>
+          <input type="number" matInput formControlName="l1_ratio">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field3.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.l1_ratio.touched) && modelFormControl.l1_ratio.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field3.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.l1_ratio.touched) && modelFormControl.l1_ratio.errors?.max">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field3.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- fit_intercept -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field4' | translate }}</mat-label>
+          <mat-select formControlName="fit_intercept">
+            <mat-option value="false">{{ 'protego.model-form.perb.field4.option1' | translate }}</mat-option>
+            <mat-option value="true">{{ 'protego.model-form.perb.field4.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- max_iter -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field5' | translate }}</mat-label>
+          <input type="number" matInput formControlName="max_iter">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field5.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.max_iter.touched) && modelFormControl.max_iter.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field5.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.max_iter.touched) && modelFormControl.max_iter.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field5.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- tol -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field6' | translate }}</mat-label>
+          <input type="number" matInput formControlName="tol">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field6.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.tol.touched) && modelFormControl.tol.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field6.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- shuffle -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field7' | translate }}</mat-label>
+          <mat-select formControlName="shuffle">
+            <mat-option value="false">{{ 'protego.model-form.perb.field7.option1' | translate }}</mat-option>
+            <mat-option value="true">{{ 'protego.model-form.perb.field7.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- verbose -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field8' | translate }}</mat-label>
+          <input type="number" matInput formControlName="verbose">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field8.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.verbose.touched) && modelFormControl.verbose.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field8.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.verbose.touched) && modelFormControl.verbose.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field8.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- eta0 -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field9' | translate }}</mat-label>
+          <input type="number" matInput formControlName="eta0">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field9.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.eta0.touched) && modelFormControl.eta0.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field9.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- n_jobs -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field10' | translate }}</mat-label>
+          <input type="number" matInput formControlName="n_jobs">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field10.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.n_jobs.touched) && modelFormControl.n_jobs.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field10.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.n_jobs.touched) && modelFormControl.n_jobs.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field10.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- random_state -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field11' | translate }}</mat-label>
+          <input type="number" matInput formControlName="random_state">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field11.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.random_state.touched) && modelFormControl.random_state.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field11.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.random_state.touched) && modelFormControl.random_state.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field11.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- early_stopping -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field12' | translate }}</mat-label>
+          <mat-select formControlName="early_stopping" (selectionChange)="resetValFrac()">
+            <mat-option value="false">{{ 'protego.model-form.perb.field12.option1' | translate }}</mat-option>
+            <mat-option value="true">{{ 'protego.model-form.perb.field12.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- validation_fraction -->
+        <mat-form-field class="protego-full-width" *ngIf="earlyStopping.value == 'true'">
+          <mat-label>{{ 'protego.model-form.perb.field13' | translate }}</mat-label>
+          <input type="number" matInput formControlName="validation_fraction">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field13.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.validation_fraction.touched) && modelFormControl.validation_fraction.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field13.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.validation_fraction.touched) && modelFormControl.validation_fraction.errors?.max">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field13.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- n_iter_no_change -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field14' | translate }}</mat-label>
+          <input type="number" matInput formControlName="n_iter_no_change">
+          <mat-hint align="end">{{ 'protego.model-form.perb.field14.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="(modelFormControl.n_iter_no_change.touched) && modelFormControl.n_iter_no_change.errors?.min">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field14.error1' | translate }}
+          </mat-error>
+          <mat-error *ngIf="(modelFormControl.n_iter_no_change.touched) && modelFormControl.n_iter_no_change.errors?.notInteger">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field14.error2' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- class_weight -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field15' | translate }}</mat-label>
+          <input matInput formControlName="class_weight">
+          <mat-hint align="end">
+            {{ 'protego.model-form.perb.field15.hint' | translate }}
+            <button (click)="classWeightDialog()" class="protego-button">
+              <mat-icon>question_mark</mat-icon>
+            </button>
+          </mat-hint>
+          <mat-error *ngIf="(modelFormControl.class_weight.touched) && modelFormControl.class_weight.errors?.isInvalid">
+            <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+            {{ 'protego.model-form.perb.field15.error' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- warm_start -->
+        <mat-form-field class="protego-full-width">
+          <mat-label>{{ 'protego.model-form.perb.field16' | translate }}</mat-label>
+          <mat-select formControlName="warm_start">
+            <mat-option value="false">{{ 'protego.model-form.perb.field16.option1' | translate }}</mat-option>
+            <mat-option value="true">{{ 'protego.model-form.perb.field16.option2' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        </form>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="saveModel()" class="protego-save-button" [disabled]="!modelForm.valid" attr.aria-label="{{ 'protego.model-form.button1.aria' | translate }}">{{ 'protego.model-form.button1' | translate }}</button>
+        </mat-card-actions>
+        <mat-card-footer>
+          <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+    <mat-card *ngIf="errorMsg" style="margin-top: 0.5em; border: 1px solid red;">
+      <h6>{{ 'protego.error' | translate }}:</h6>
+      <p>{{ errorMsg }}</p>
+    </mat-card>
+  </div>

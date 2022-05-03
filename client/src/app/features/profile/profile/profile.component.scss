@@ -1,0 +1,47 @@
+@import '../../../../styles-variables';
+
+.protego-page-container {
+  width: 20%;
+  min-width: 400px;
+  margin: auto;
+  padding-top: 1em;
+}
+
+.protego-full-width {
+  width: 100%;
+}
+
+.protego-card-header-image {
+  background-size: cover;
+  cursor: pointer;
+}
+
+@media (min-width: map-get($grid-breakpoints, xs)) {
+  .protego-page-container {
+    width: 90%;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, sm)) {
+  .protego-page-container {
+    width: 50%;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, md)) {
+  .protego-page-container {
+    width: 40%;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)) {
+  .protego-page-container {
+    width: 30%;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, xl)) {
+  .protego-page-container {
+    width: 20%;
+  }
+}

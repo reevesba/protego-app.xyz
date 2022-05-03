@@ -1,0 +1,280 @@
+<div class="protego-page-container">
+    <h2>{{ 'protego.workspace.menu.api-settings' | translate }}</h2>
+    <p>{{ 'protego.getting-started' | translate }}</p>
+
+    <!------------ Groups Start ------------>
+
+    <mat-divider class="protego-divider"></mat-divider>
+
+    <div style="float: left; margin-top: 3em;">
+        <h3>{{ 'protego.groups.title' | translate }} ({{ groupsCount }})</h3>
+    </div>
+
+    <div style="clear: both;">
+        <button style="float: left;" mat-button (click)="openUserGroupDialog('Add',{})" mat-raised-button color="primary" attr.aria-label="{{ 'protego.groups.aria1' | translate }}">{{ 'protego.groups.button1' | translate }}</button>
+        <button style="float: left;" mat-button (click)="saveGroups()" mat-raised-button color="primary" attr.aria-label="{{ 'protego.groups.aria2' | translate }}">{{ 'protego.groups.button2' | translate }}</button>
+    </div>
+
+    <mat-form-field style="float: right;">
+        <mat-label>{{ 'protego.groups.filter' | translate }}</mat-label>
+        <input matInput (keyup)="applyGroupFilter($event)" placeholder="{{ 'protego.groups.filter.placeholder' | translate }}" #input>
+    </mat-form-field>
+
+    <div class="protego-table-container mat-elevation-z8">
+        <table mat-table #groupTable [dataSource]="groupDataSource" matSort>
+
+            <!-- id column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.groups.id' | translate }} </th>
+                <td mat-cell *matCellDef="let group"> {{ group.id }} </td>
+            </ng-container>
+
+            <!-- name column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.groups.name' | translate }} </th>
+                <td mat-cell *matCellDef="let group"> {{ group.name }} </td>
+            </ng-container>
+
+            <!-- description column -->
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.groups.description' | translate }} </th>
+                <td mat-cell *matCellDef="let group"> {{ group.description }} </td>
+            </ng-container>
+
+            <!-- admin column -->
+            <ng-container matColumnDef="admin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.groups.admin' | translate }} </th>
+                <td mat-cell *matCellDef="let group"> {{ group.admin }} </td>
+            </ng-container>
+
+            <!-- active column -->
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.groups.active' | translate }} </th>
+                <td mat-cell *matCellDef="let group"> {{ group.active }} </td>
+            </ng-container>
+
+            <!-- created at column -->
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.groups.created.at' | translate }} </th>
+                <td mat-cell *matCellDef="let group"> {{ group.created_at }} </td>
+            </ng-container>
+
+            <!-- updated at column -->
+            <ng-container matColumnDef="updated_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.groups.updated.at' | translate }} </th>
+                <td mat-cell *matCellDef="let group"> {{ group.updated_at }} </td>
+            </ng-container>
+
+            <!-- last updated by column -->
+            <ng-container matColumnDef="updated_by">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.groups.updated.by' | translate }} </th>
+                <td mat-cell *matCellDef="let group"> {{ group.updated_by }} </td>
+            </ng-container>
+
+            <!-- action column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="protego-fixed-column"> {{ 'protego.groups.action' | translate }} </th>
+                <td mat-cell *matCellDef="let element" class="action-link"> 
+                    <button mat-button *ngIf="element.id != null && element.admin === username" (click)="openUserGroupDialog('Update', element)" mat-raised-button color="primary" attr.aria-label="{{ 'protego.groups.aria3' | translate }}">{{ 'protego.groups.button3' | translate }}</button>
+                    <button mat-button *ngIf="element.id != null && element.admin === username" (click)="openUserGroupDialog('Delete', element)" mat-raised-button color="warn" attr.aria-label="{{ 'protego.groups.aria4' | translate }}">{{ 'protego.groups.button4' | translate }}</button>  
+                </td>
+            </ng-container>
+
+            <!-- header row -->
+            <tr mat-header-row *matHeaderRowDef="groupColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: groupColumns;"></tr>
+
+            <!-- row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">{{ 'protego.groups.empty' | translate }}</td>
+        </table>
+        <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+    </div>
+
+    <!------------ Group Members Start ------------>
+
+    <mat-divider class="protego-divider"></mat-divider>
+
+    <div style="float: left; margin-top: 4em;">
+        <h3>{{ 'protego.group-members.title' | translate }} ({{ membersCount }})</h3>
+    </div>
+
+    <div style="clear: both;" *ngIf="currentGroupAdmin === username">
+        <button style="float: left;" mat-button (click)="openGroupMemberDialog('Add',{})" mat-raised-button color="primary" attr.aria-label="{{ 'protego.group-members.aria1' | translate }}">{{ 'protego.group-members.button1' | translate }}</button>
+        <button style="float: left;" mat-button (click)="saveGroupMembers()" mat-raised-button color="primary" attr.aria-label="{{ 'protego.group-members.aria2' | translate }}">{{ 'protego.group-members.button2' | translate }}</button>
+    </div>
+
+    <mat-form-field style="float: right;" [ngClass]="currentGroupAdmin === username?'protego-clear-margin':'protego-margin-top'">
+        <mat-label>{{ 'protego.group-members.select-label' | translate }}</mat-label>
+        <mat-select #select (selectionChange)="groupFieldChange($event.source.value)" [(value)]="currentGroup">
+            <mat-option *ngFor="let group of groups" [value]="group.id" role="option">
+                {{ group.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="protego-table-container mat-elevation-z8">
+        <table mat-table #memberTable [dataSource]="memberDataSource" matSort>
+
+            <!-- id column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.group-members.id' | translate }} </th>
+                <td mat-cell *matCellDef="let member"> {{ member.id }} </td>
+            </ng-container>
+
+            <!-- group_id column -->
+            <ng-container matColumnDef="group_id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.group-members.group-id' | translate }} </th>
+                <td mat-cell *matCellDef="let member"> {{ member.group_id }} </td>
+            </ng-container>
+
+            <!-- admin column -->
+            <ng-container matColumnDef="admin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.group-members.admin' | translate }} </th>
+                <td mat-cell *matCellDef="let member"> {{ member.admin }} </td>
+            </ng-container>
+
+            <!-- username column -->
+            <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.group-members.username' | translate }} </th>
+                <td mat-cell *matCellDef="let member"> {{ member.username }} </td>
+            </ng-container>
+
+            <!-- active column -->
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.group-members.active' | translate }} </th>
+                <td mat-cell *matCellDef="let member"> {{ member.active }} </td>
+            </ng-container>
+
+            <!-- created at column -->
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.group-members.created.at' | translate }} </th>
+                <td mat-cell *matCellDef="let member"> {{ member.created_at }} </td>
+            </ng-container>
+
+            <!-- updated at column -->
+            <ng-container matColumnDef="updated_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.group-members.updated.at' | translate }} </th>
+                <td mat-cell *matCellDef="let member"> {{ member.updated_at }} </td>
+            </ng-container>
+
+            <!-- last updated by column -->
+            <ng-container matColumnDef="updated_by">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.group-members.updated.by' | translate }} </th>
+                <td mat-cell *matCellDef="let member"> {{ member.updated_by }} </td>
+            </ng-container>
+
+            <!-- action column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="protego-fixed-column"> {{ 'protego.group-members.action' | translate }} </th>
+                <td mat-cell *matCellDef="let element" class="action-link"> 
+                    <button mat-button *ngIf="element.id != null && element.admin === username && element.username !== username" (click)="openGroupMemberDialog('Update', element)" mat-raised-button color="primary" attr.aria-label="{{ 'protego.group-members.aria3' | translate }}">{{ 'protego.group-members.button3' | translate }}</button>
+                    <button mat-button *ngIf="element.id != null && element.admin === username && element.username !== username" (click)="openGroupMemberDialog('Delete', element)" mat-raised-button color="warn" attr.aria-label="{{ 'protego.group-members.aria4' | translate }}">{{ 'protego.group-members.button4' | translate }}</button>  
+                </td>
+            </ng-container> *ngIf="currentGroupAdmin === username"
+
+            <!-- header row -->
+            <tr mat-header-row *matHeaderRowDef="memberColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: memberColumns;"></tr>
+
+            <!-- row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">{{ 'protego.group-members.empty' | translate }}</td>
+        </table>
+        <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+    </div>
+
+    <!------------ API Tokens Start ------------>
+
+    <mat-divider class="protego-divider"></mat-divider>
+
+    <div style="float: left; margin-top: 3em;">
+        <h3>{{ 'protego.api-tokens.title' | translate }} ({{ apiTokensCount }})</h3>
+        <p>API Key will be generated on save.</p>
+    </div>
+
+    <div style="clear: both;" *ngIf="currentGroupAdmin2 === username">
+        <button style="float: left;" mat-button (click)="openApiTokenDialog('Add',{})" mat-raised-button color="primary" attr.aria-label="{{ 'protego.api-tokens.aria1' | translate }}">{{ 'protego.api-tokens.button1' | translate }}</button>
+        <button style="float: left;" mat-button (click)="saveApiTokens()" mat-raised-button color="primary" attr.aria-label="{{ 'protego.api-tokens.aria2' | translate }}">{{ 'protego.api-tokens.button2' | translate }}</button>
+    </div>
+
+    <mat-form-field style="float: right;" [ngClass]="currentGroupAdmin2 === username?'protego-clear-margin':'protego-margin-top'">
+        <mat-label>{{ 'protego.api-tokens.select-label' | translate }}</mat-label>
+        <mat-select #select (selectionChange)="groupFieldChange2($event.source.value)" [(value)]="currentGroup2">
+            <mat-option *ngFor="let group of groups" [value]="group.id" role="option">
+                {{ group.name }} 
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="protego-table-container mat-elevation-z8">
+        <table mat-table #apiTable [dataSource]="apiTokenDataSource" matSort>
+
+            <!-- id column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.api-tokens.id' | translate }} </th>
+                <td mat-cell *matCellDef="let token"> {{ token.id }} </td>
+            </ng-container>
+
+            <!-- group_id column -->
+            <ng-container matColumnDef="group_id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.api-tokens.group-id' | translate }} </th>
+                <td mat-cell *matCellDef="let token"> {{ token.group_id }} </td>
+            </ng-container>
+
+            <!-- expiration column -->
+            <ng-container matColumnDef="expiration">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.api-tokens.expiration' | translate }} </th>
+                <td mat-cell *matCellDef="let token"> {{ token.expiration | date:'mediumDate' }} </td>
+            </ng-container>
+
+            <!-- api_key column -->
+            <ng-container matColumnDef="api_key">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.api-tokens.api_key' | translate }} </th>
+                <td mat-cell *matCellDef="let token" class="protego-max-column"> {{ token.api_key }} </td>
+            </ng-container>
+
+            <!-- active column -->
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.api-tokens.active' | translate }} </th>
+                <td mat-cell *matCellDef="let token"> {{ token.active }} </td>
+            </ng-container>
+
+            <!-- created at column -->
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.api-tokens.created.at' | translate }} </th>
+                <td mat-cell *matCellDef="let token"> {{ token.created_at }} </td>
+            </ng-container>
+
+            <!-- updated at column -->
+            <ng-container matColumnDef="updated_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.api-tokens.updated.at' | translate }} </th>
+                <td mat-cell *matCellDef="let token"> {{ token.updated_at }} </td>
+            </ng-container>
+
+            <!-- last updated by column -->
+            <ng-container matColumnDef="updated_by">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'protego.api-tokens.updated.by' | translate }} </th>
+                <td mat-cell *matCellDef="let token"> {{ token.updated_by }} </td>
+            </ng-container>
+
+            <!-- action column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="protego-fixed-column"> {{ 'protego.api-tokens.action' | translate }} </th>
+                <td mat-cell *matCellDef="let element" class="action-link"> 
+                    <button mat-button *ngIf="false" (click)="openApiTokenDialog('Update', element)" mat-raised-button color="primary" attr.aria-label="{{ 'protego.api-tokens.aria3' | translate }}">{{ 'protego.api-tokens.button3' | translate }}</button>
+                    <button mat-button *ngIf="element.id != null && currentGroupAdmin2 === username" (click)="openApiTokenDialog('Delete', element)" mat-raised-button color="warn" attr.aria-label="{{ 'protego.api-tokens.aria4' | translate }}">{{ 'protego.api-tokens.button4' | translate }}</button>  
+                </td>
+            </ng-container>
+
+            <!-- header row -->
+            <tr mat-header-row *matHeaderRowDef="apiTokenColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: apiTokenColumns;"></tr>
+
+            <!-- row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">{{ 'protego.api-tokens.empty' | translate }}</td>
+        </table>
+        <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+    </div>
+</div>

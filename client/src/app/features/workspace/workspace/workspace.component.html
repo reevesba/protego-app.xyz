@@ -1,0 +1,27 @@
+<div class="protego-page-container">
+    <div class="protego-wrapper">
+        <div class="protego-toolbar">
+            <mat-toolbar color="primary">
+                <button mat-icon-button (click)="sidenav.toggle()" aria-label="toggle sidenav">
+                    <mat-icon>{{ !sidenav.opened?'arrow_drop_down':'arrow_left' }}</mat-icon>
+                </button>
+
+                <h1 class="protego-title">{{ 'protego.workspace.menu.title' | translate }}</h1>
+            </mat-toolbar>
+        </div>
+
+        <mat-sidenav-container [hasBackdrop]="false">
+            <mat-sidenav #sidenav mode="over" [opened]="!media.isActive('xs')" disableClose="true">
+                <mat-nav-list>
+                    <a mat-list-item *ngFor="let item of navList" [routerLink]="[item.link]">
+                        {{ item.label | translate }}
+                    </a>
+                </mat-nav-list>
+            </mat-sidenav>
+
+            <div class="protego-content">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-container>
+    </div>
+</div>

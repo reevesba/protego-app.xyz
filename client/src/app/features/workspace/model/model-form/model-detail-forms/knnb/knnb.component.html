@@ -1,0 +1,128 @@
+<div class="protego-page-container">
+    <mat-card>
+      <h2 style="float: left;">{{ 'protego.model-form.knnb.header' | translate }}</h2>
+      <a style="float: right;" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html" target="_blank">
+        <mat-icon>help_outline</mat-icon>
+      </a>
+        <form class="protego-form" [formGroup]="modelForm">
+          <!-- name -->
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.knnb.name' | translate }}</mat-label>
+            <input matInput formControlName="name">
+            <mat-hint align="end">{{ 'protego.model-form.knnb.name.hint' | translate }}</mat-hint>
+            <mat-error *ngIf="(modelFormControl.name.touched) && modelFormControl.name.errors?.required">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.knnb.name.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <!-- n_neighbors -->
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.knnb.field1' | translate }}</mat-label>
+            <input type="number" matInput formControlName="n_neighbors">
+            <mat-hint align="end">{{ 'protego.model-form.knnb.field1.hint' | translate }}</mat-hint>
+            <mat-error *ngIf="(modelFormControl.n_neighbors.touched) && modelFormControl.n_neighbors.errors?.min">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.knnb.field1.error1' | translate }}
+            </mat-error>
+            <mat-error *ngIf="(modelFormControl.n_neighbors.touched) && modelFormControl.n_neighbors.errors?.notInteger">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.knnb.field1.error2' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <!-- weights -->
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.knnb.field2' | translate }}</mat-label>
+            <mat-select formControlName="weights">
+              <mat-option *ngFor="let weight of weightVals" [value]="weight.value">
+                {{ weight.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-hint align="end">{{ 'protego.model-form.knnb.field2.hint' | translate }}</mat-hint>
+          </mat-form-field>
+
+          <!-- algorithm_knn -->
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.knnb.field3' | translate }}</mat-label>
+            <mat-select formControlName="algorithm_knn">
+              <mat-option *ngFor="let algorithm of algorithms" [value]="algorithm.value">
+                {{ algorithm.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-hint align="end">{{ 'protego.model-form.knnb.field3.hint' | translate }}</mat-hint>
+          </mat-form-field>
+
+          <!-- leaf_size -->
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.knnb.field4' | translate }}</mat-label>
+            <input type="number" matInput formControlName="leaf_size">
+            <mat-hint align="end">{{ 'protego.model-form.knnb.field4.hint' | translate }}</mat-hint>
+            <mat-error *ngIf="(modelFormControl.leaf_size.touched) && modelFormControl.leaf_size.errors?.min">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.knnb.field4.error1' | translate }}
+            </mat-error>
+            <mat-error *ngIf="(modelFormControl.leaf_size.touched) && modelFormControl.leaf_size.errors?.notInteger">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.knnb.field4.error2' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <!-- p -->
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.knnb.field5' | translate }}</mat-label>
+            <mat-select formControlName="p">
+              <mat-option *ngFor="let p of ps" [value]="p.value">
+                {{ p.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-hint align="end">{{ 'protego.model-form.knnb.field5.hint' | translate }}</mat-hint>
+          </mat-form-field>
+
+          <!-- metric -->
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.knnb.field6' | translate }}</mat-label>
+            <mat-select formControlName="metric">
+              <mat-option *ngFor="let metric of metrics" [value]="metric.value">
+                {{ metric.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-hint align="end">{{ 'protego.model-form.knnb.field6.hint' | translate }}</mat-hint>
+          </mat-form-field>
+
+          <!-- metric_params -->
+          <!--
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.knnb.field7' | translate }}</mat-label>
+            <input matInput formControlName="metric_params">
+            <mat-hint align="end">{{ 'protego.model-form.knnb.field7.hint' | translate }}</mat-hint>
+          </mat-form-field>
+          -->
+
+          <!-- n_jobs -->
+          <mat-form-field class="protego-full-width">
+            <mat-label>{{ 'protego.model-form.knnb.field8' | translate }}</mat-label>
+            <input type="number" matInput formControlName="n_jobs">
+            <mat-hint align="end">{{ 'protego.model-form.knnb.field8.hint' | translate }}</mat-hint>
+            <mat-error *ngIf="(modelFormControl.n_jobs.touched) && modelFormControl.n_jobs.errors?.min">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.knnb.field8.error1' | translate }}
+            </mat-error>
+            <mat-error *ngIf="(modelFormControl.n_jobs.touched) && modelFormControl.n_jobs.errors?.notInteger">
+              <mat-icon style="margin-right: 2px;">error_outline</mat-icon>
+              {{ 'protego.model-form.knnb.field8.error2' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </form>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="saveModel()" class="protego-save-button" [disabled]="!modelForm.valid" attr.aria-label="{{ 'protego.model-form.button1.aria' | translate }}">{{ 'protego.model-form.button1' | translate }}</button>
+        </mat-card-actions>
+        <mat-card-footer>
+          <mat-progress-bar *ngIf="isLoading" mode='query'></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+    <mat-card *ngIf="errorMsg" style="margin-top: 0.5em; border: 1px solid red;">
+      <h6>{{ 'protego.error' | translate }}:</h6>
+      <p>{{ errorMsg }}</p>
+    </mat-card>
+  </div>

@@ -1,0 +1,13 @@
+<div class="protego-tiles">
+    <mat-card *ngFor="let tile of tileList" class="protego-tile" [routerLink]="tile.link">
+        <mat-card-header>
+            <mat-card-title>{{ tile.title | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-icon>{{ tile.icon }}</mat-icon>
+        </mat-card-content>
+        <mat-card-footer>
+            <mat-card-subtitle class="protego-subtitle">{{ tile.subtitle | translate }}</mat-card-subtitle>
+        </mat-card-footer>
+    </mat-card>
+</div>
