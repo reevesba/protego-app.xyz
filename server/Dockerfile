@@ -19,7 +19,7 @@ RUN chmod 777 /usr/src/app/entrypoint.sh
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Install protego from TestPyPI
-RUN pip3 install -i https://test.pypi.org/simple/ protego
+#RUN pip3 install -i https://test.pypi.org/simple/ protego
 
 # COPY uswgi.ini
 COPY ./uwsgi.ini /etc/uwsgi.ini

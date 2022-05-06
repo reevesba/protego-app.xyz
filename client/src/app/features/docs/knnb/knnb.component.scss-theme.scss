@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+
+@mixin protego-knnb-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .protego-code-block {
+        background-color: mat-color($accent, lighter);
+        border: 1px solid mat-color($primary, lighter);
+    }
+
+    .protego-code {
+        color: mat-color($accent, default-contrast);
+    }
+
+    .protego-code-span {
+        background-color: mat-color($primary, lighter);
+        color: mat-color($primary, default-contrast);
+    }
+
+    .protego-bottom-border {
+        border-bottom: 0.04rem solid #BFBFBD;
+    }
+    
+    .protego-methods .mat-expansion-panel-header,
+    .protego-methods .mat-expansion-panel-header.mat-expanded,
+    .protego-methods .mat-expansion-panel:hover .mat-expansion-panel-header:hover {
+        background-color: mat-color($accent, lighter);
+        color: mat-color($accent, default-contrast);
+    }
+    
+    .protego-methods .mat-expansion-panel {
+        border-left: 5px solid mat-color($primary, default);
+    }
+
+    .protego-methods .mat-expansion-panel-header-title > mat-icon {
+        color: mat-color($primary, default);
+    }
+
+    .protego-methods table > tr > th {
+        border-right: thin solid mat-color($primary, default);
+    }
+
+    .protego-warning {
+        background-color: mat-color($warn, 400);
+        border: thin solid mat-color($warn, darker);
+        color: mat-color($warn, default-contrast);
+    }
+}

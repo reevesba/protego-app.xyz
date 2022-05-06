@@ -1,4 +1,4 @@
-const packageJson = require('../../../client/package.json');
+import pkg from '../../package.json';
 
 export const environment = {
   appName: 'Protego',
@@ -9,17 +9,17 @@ export const environment = {
   apiUrl: 'https://protego-app.xyz/api',
   i18nPrefix: '',
   versions: {
-    app: packageJson.version,
-    angular: packageJson.dependencies['@angular/core'],
-    ngrx: packageJson.dependencies['@ngrx/store'],
-    material: packageJson.dependencies['@angular/material'],
-    bootstrap: packageJson.dependencies.bootstrap,
-    rxjs: packageJson.dependencies.rxjs,
-    ngxtranslate: packageJson.dependencies['@ngx-translate/core'],
-    fontAwesome: packageJson.dependencies['@fortawesome/fontawesome-free'],
-    angularCli: packageJson.devDependencies['@angular/cli'],
-    typescript: packageJson.devDependencies['typescript'],
-    cypress: packageJson.devDependencies['cypress'],
-    eslint: packageJson.devDependencies['eslint']
+    app: pkg.version,
+    angular: pkg.dependencies['@angular/core'],
+    ngrx: pkg.dependencies['@ngrx/store'],
+    material: pkg.dependencies['@angular/material'],
+    bootstrap: pkg.dependencies.bootstrap,
+    rxjs: pkg.dependencies.rxjs,
+    ngxtranslate: pkg.dependencies['@ngx-translate/core'],
+    fontAwesome: pkg.dependencies['@fortawesome/fontawesome-free'],
+    angularCli: pkg.devDependencies['@angular/cli'],
+    typescript: pkg.devDependencies['typescript'],
+    cypress: pkg.devDependencies['cypress'],
+    eslint: pkg.devDependencies['eslint']
   }
 };

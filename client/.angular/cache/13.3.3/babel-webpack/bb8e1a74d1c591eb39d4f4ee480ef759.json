@@ -1,1 +1,0 @@
-{"ast":null,"code":"export function debug(reducer) {\n  return function (state, action) {\n    const newState = reducer(state, action);\n    console.log(`[DEBUG] action: ${action.type}`, {\n      payload: action.payload,\n      oldState: state,\n      newState\n    });\n    return newState;\n  };\n}","map":null,"metadata":{},"sourceType":"module"}

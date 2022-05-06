@@ -1,0 +1,63 @@
+<div class="protego-page-container protego-methods">
+    <h1>FeatureExtractor</h1>
+    <p>Used to extract SQL injection payload features.</p>
+    <p>Extracted features include:</p>
+    <ul>
+        <li><strong>num_chars:</strong> number of characters.</li>
+        <li><strong>num_words:</strong> number of words.</li>
+        <li><strong>num_special_chars:</strong> number of special characters.</li>
+        <li><strong>num_ticks:</strong> number of single quotes.</li>
+        <li><strong>num_dashes:</strong> number of dashes.</li>
+        <li><strong>num_commas:</strong> number of commas.</li>
+        <li><strong>num_pipes:</strong> number of pipe operators.</li>
+        <li><strong>num_equals:</strong> number of equals signs.</li>
+        <li><strong>num_keywords:</strong> number of SQL keywords.</li>
+        <li><strong>num_parens:</strong> number of parenthesis.</li>
+        <li><strong>avg_word_len:</strong> average word length.</li>
+        <li><strong>num_white_spaces:</strong> number of white spaces.</li>
+        <li><strong>num_comments:</strong> number of SQL comments.</li>
+        <li><strong>label:</strong> classification.</li>
+    </ul>
+
+    <h2 class="protego-bottom-border">Parameters</h2>
+    <ul>
+        <li><strong>None</strong></li>
+    </ul>
+
+    <h2 class="protego-bottom-border">Methods</h2>
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">transform</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Transforms a raw dataset of payloads and labels into a dataset appropriate for learning.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>data: Pandas DataFrame</strong>
+                    <p>Raw dataset to transform.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>Transformed dataset as Pandas DataFrame.</td>
+            </tr>
+        </table> 
+    </mat-expansion-panel>
+
+    <h2 class="protego-bottom-border">Examples</h2>
+    <div class="protego-editor">
+        <button mat-button matTooltip="Toggle Line Numbers" style="float: right" (click)="toggleNumbers()"><mat-icon>format_list_numbered</mat-icon></button>
+        <span *ngIf="showNumbers" class="protego-ln">1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from </span>protego.utils.feature_extractor <span class="protego-key">import</span> FeatureExtractor <br>
+        <span *ngIf="showNumbers" class="protego-ln">2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from </span>protego.utils.DataLoader <span class="protego-key">import</span> DataLoader <br>
+        <span *ngIf="showNumbers" class="protego-ln">3&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">4&nbsp;&nbsp;&nbsp;&nbsp;</span>data_loader = DataLoader() <br>
+        <span *ngIf="showNumbers" class="protego-ln">5&nbsp;&nbsp;&nbsp;&nbsp;</span>dataset = data_loader.load() <br>
+        <span *ngIf="showNumbers" class="protego-ln">6&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">7&nbsp;&nbsp;&nbsp;&nbsp;</span>fe = FeatureExtractor() <br>
+        <span *ngIf="showNumbers" class="protego-ln">8&nbsp;&nbsp;&nbsp;&nbsp;</span>transformed_data = fe.transform(dataset) <br>
+    </div>
+</div>

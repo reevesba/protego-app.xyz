@@ -19,8 +19,25 @@
 @import './app/app/app.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
 @import './app/features/workspace/workspace/workspace.component.scss-theme';
-@import './app/features//workspace//docs/docs.component.scss-theme.scss';
+@import './app/features/workspace/docs/docs.component.scss-theme.scss';
 @import './app/features/home/home/home.component.scss-theme';
+@import './app/features/docs/base-class/base-class.component.scss-theme.scss';
+@import './app/features/docs/base-batch/base-batch.component.scss-theme.scss';
+@import './app/features/docs/base-online/base-online.component.scss-theme.scss';
+@import './app/features/docs/data-loader/data-loader.component.scss-theme.scss';
+@import './app/features/docs/feature-extractor/feature-extractor.component.scss-theme.scss';
+@import './app/features/docs/knnb/knnb.component.scss-theme.scss';
+@import './app/features/docs/knno/knno.component.scss-theme.scss';
+@import './app/features/docs/logb/logb.component.scss-theme.scss';
+@import './app/features/docs/logo/logo.component.scss-theme.scss';
+@import './app/features/docs/mnbb/mnbb.component.scss-theme.scss';
+@import './app/features/docs/mnbo/mnbo.component.scss-theme.scss';
+@import './app/features/docs/perb/perb.component.scss-theme.scss';
+@import './app/features/docs/pero/pero.component.scss-theme.scss';
+@import './app/features/docs/ranb/ranb.component.scss-theme.scss';
+@import './app/features/docs/rano/rano.component.scss-theme.scss';
+@import './app/features/docs/treb/treb.component.scss-theme.scss';
+@import './app/features/docs/treo/treo.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
   @include protego-styles-reset-theme($theme);
@@ -29,6 +46,23 @@
   @include protego-big-input-component-theme($theme);
   @include protego-home-component-theme($theme);
   @include protego-doc-component-theme($theme);
+  @include protego-base-class-component-theme($theme);
+  @include protego-base-batch-component-theme($theme);
+  @include protego-base-online-component-theme($theme);
+  @include protego-data-loader-component-theme($theme);
+  @include protego-feature-extractor-component-theme($theme);
+  @include protego-knnb-component-theme($theme);
+  @include protego-knno-component-theme($theme);
+  @include protego-logb-component-theme($theme);
+  @include protego-logo-component-theme($theme);
+  @include protego-mnbb-component-theme($theme);
+  @include protego-mnbo-component-theme($theme);
+  @include protego-perb-component-theme($theme);
+  @include protego-pero-component-theme($theme);
+  @include protego-ranb-component-theme($theme);
+  @include protego-rano-component-theme($theme);
+  @include protego-treb-component-theme($theme);
+  @include protego-treo-component-theme($theme);
 }
 
 .default-theme {

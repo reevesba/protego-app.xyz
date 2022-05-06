@@ -188,7 +188,7 @@ export class ApiSettingsComponent implements OnInit {
 
   @ViewChild(MatTable, {static: true}) apiTable: MatTable<ApiToken>;
   addApiTokenRowData(row_obj: any) {
-    this.apiTokenDataSource.data.push({ group_id: row_obj.value1, expiration: row_obj.value2, api_key: row_obj.value3, created_by: this.username });
+    this.apiTokenDataSource.data.push({ group_id: row_obj.value1, expiration: new Date(row_obj.value2), api_key: row_obj.value3, created_by: this.username });
     this.apiTokenDataSource.data = [...this.apiTokenDataSource.data];
     this.apiTokensCount++;
     this.apiTable.renderRows();
@@ -226,7 +226,7 @@ export class ApiSettingsComponent implements OnInit {
         value['group_id'] = row_obj.value1;
         value['expiration'] = row_obj.value2;
         value['updated_by'] = this.username;
-        this.updatedGroups.push(row_obj.id);
+        this.updatedApiTokens.push(row_obj.id);
       }
       return true;
     });

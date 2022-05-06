@@ -1,0 +1,61 @@
+<div class="protego-page-container protego-methods">
+    <h1>Base</h1>
+    <p>Base class that is inherited by the majority of classes in Protego.</p>
+    <p>This base class allows us to handle the following tasks in a uniform manner:</p>
+    <ul>
+        <li>Saving and loading models to and from file.</li>
+    </ul>
+
+    <h2 class="protego-bottom-border">Parameters</h2>
+    <ul>
+        <li><strong>model : Union[<a href="docs/base-batch">base.BatchBase</a>, <a href="docs/base-online">base.BatchOnline</a>]</strong></li>
+        <p>SciKit Learn or River classifier.</p>
+    </ul>
+
+    <h2 class="protego-bottom-border">Methods</h2>
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">save</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Save a model as a pickled file.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>filename: string</strong>
+                    <p>Path and filename of pickled model to save.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>None</td>
+            </tr>
+        </table> 
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">load</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Load a pickled model.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>filename: string</strong>
+                    <p>Path and filename of pickled model to load.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>None</td>
+            </tr>
+        </table>  
+    </mat-expansion-panel>
+</div>

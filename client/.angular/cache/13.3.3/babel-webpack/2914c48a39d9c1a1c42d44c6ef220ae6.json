@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class OnlineKNN {\n  constructor(init) {\n    // Model Fields\n    this.group_id = 0;\n    this.algorithm = '';\n    this.name = ''; // Hyperparameters\n\n    this.n_neighbors = 5;\n    this.window_size = 1000;\n    this.leaf_size = 30;\n    this.p = 2;\n    Object.assign(this, init);\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

@@ -5,6 +5,7 @@ __pycache__/
 
 # Angular client directories
 client/node_modules
+client/.angular/cache
 
 # Environment variables
 .env

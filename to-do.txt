@@ -1,6 +1,6 @@
 To-do
 -----
-* update readme
+
 
 Complete
 --------
@@ -20,6 +20,14 @@ Complete
 * run translate python script
 * deploy to DO - Docker 19.03.12 on Ubuntu 20.04
 * run certbot
+* error occurs with uploading photo - Http failure response for https://protego-app.xyz/api/users/photo/reevesba: 502 Bad Gateway
+* mat-datepicker isn't showing the date prompt, i.e. cannot select date
+* error occurs with uploading photo - Http failure response for https://protego-app.xyz/api/users/photo/reevesba: 502 Bad Gateway
+* mat-datepicker isn't showing the date prompt, i.e. cannot select date
+* push protego to pypi and add to requirements.txt
+* color the warning sections in the documentation (batch log reg has example in html)
+* remove margin-bottom from list items in documentation, selectively apply margin
+* update readme
 
 On Hold
 -------
@@ -38,6 +46,10 @@ Publish to TestPyPI:
 Delete, dist and egg then increment the version in setup.py
 $ python3 -m build
 $ python3 -m twine upload --repository testpypi dist/*
+    - username is __token__, password is token value
+
+Publish to PyPI:
+$ twine upload dist/*
     - username is __token__, password is token value
 
 Certbot

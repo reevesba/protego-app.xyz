@@ -1,0 +1,51 @@
+@import '../../../../styles-variables';
+
+.protego-page-container {
+  height: 100%;
+  width: 100%;
+  overflow: clip;
+}
+
+.protego-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+mat-sidenav-container {
+  height: 100%;
+  width: 100%;
+
+  @media (max-width: $toolbar-breakpoint) {
+    .protego-content {
+      margin-top: 56px !important;
+    }
+  }
+}
+
+mat-sidenav {
+  width: 250px;
+
+  .mat-nav-list {
+    padding-top: 0;
+  }
+}
+
+.protego-expansion .mat-expansion-panel-header {
+  padding-left: 16px !important;
+  font-size: 16px !important;
+  height: 32px;
+}
+
+.protego-expansion .mat-expansion-panel-body {
+  padding-right: 0 !important;
+  padding-bottom: 0;
+}
+
+.protego-expansion .mat-list-item {
+  height: 32px;
+}
+
+.protego-expansion .mat-list-text {
+  padding: 0 !important;
+  font-size: 16px !important;
+}

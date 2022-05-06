@@ -69,17 +69,17 @@ def requires_group_role(group_roles):
             model_id = None
             payload_id = None
 
-            if request.method == "POST":
-                group_id = request.get_json().get("group_id", None)
+            if request.is_json:
+                request_json = request.get_json()
+                group_id = request_json.get("group_id", None)
+                api_token_id = request_json.get("apiTokenId", None)
+                group_member_id = request_json.get("memberId", None)
+                model_id = request_json.get("modelId", None)
+                payload_id = request_json.get("payloadId", None)
 
-            if request.method == "PUT":
-                group_id = request.get_json().get("groupId", None)
-                api_token_id = kwargs.get("apiTokenId", None)
-                group_member_id = kwargs.get("memberId", None)
-                model_id = kwargs.get("modelId", None)
-                payload_id = kwargs.get("payloadId", None)
-
-            if request.method in ["GET", "DELETE"]:
+                if group_id is None:
+                    group_id = kwargs.get("groupId", None)
+            else:
                 group_id = kwargs.get("groupId", None)
                 api_token_id = kwargs.get("apiTokenId", None)
                 group_member_id = kwargs.get("memberId", None)
@@ -164,14 +164,13 @@ def requires_isuser():
     def wrapper(func):
         @wraps(func)
         def decorator(*args, **kwargs):
-            if request.method in ["POST", "PUT"]:
+            if request.is_json:
                 username = request.get_json().get("username", None)
-
-            if request.method in ["GET", "DELETE"]:
+            else:
                 username = kwargs.get("username", None)
 
-                if username in [None, ""]:
-                    return func(*args, **kwargs)
+            if username in [None, ""]:
+                return func(*args, **kwargs)
 
             auth_token = get_auth_token()
 

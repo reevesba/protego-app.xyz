@@ -27,3 +27,4 @@ requests==2.27.1
 # Machine Learning
 river==0.10.1
 scikit-learn==1.0.2
+protego-sqli==1.0.1

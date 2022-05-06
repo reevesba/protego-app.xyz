@@ -15,6 +15,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { environment } from '../../environments/environment';
@@ -87,6 +89,9 @@ export function httpLoaderFactory(http: HttpClient) {
     MatIconModule,
     MatSelectModule,
     MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRippleModule,
     MatSnackBarModule,
     MatButtonModule,
 
@@ -133,6 +138,9 @@ export function httpLoaderFactory(http: HttpClient) {
     MatIconModule,
     MatSelectModule,
     MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRippleModule,
     MatSnackBarModule,
     MatButtonModule,
 

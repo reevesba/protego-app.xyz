@@ -1,0 +1,188 @@
+<div class="protego-page-container protego-methods">
+    <h1>PerceptronClassifier</h1>
+    <p>A perceptron classifier.</p>
+
+    <h2 class="protego-bottom-border">Parameters</h2>
+    <ul>
+        <li><strong>penalty : {{ '{' }}"l2","l1","elasticnet"{{ '}' }}, default=None</strong></li>
+        <p>The penalty (aka regularization term) to be used.</p>
+
+        <li><strong>alpha : float, default=0.0001</strong></li>
+        <p>Constant that multiplies the regularization term if regularization is used.</p>
+
+        <li><strong>l1_ratio : float, default=0.15</strong></li>
+        <p>The Elastic Net mixing parameter, with <code>0 <= l1_ratio <= 1</code>. <code>l1_ratio=0</code> corresponds to L2 penalty, <code>l1_ratio=1</code> to L1. Only used if <code>penalty='elasticnet'</code>.</p>
+
+        <li><strong>fit_intercept : bool, default=True</strong></li>
+        <p>Whether the intercept should be estimated or not. If False, the data is assumed to be already centered.</p>
+
+        <li><strong>max_iter : int, default=1000</strong></li>
+        <p>The maximum number of passes over the training data (aka epochs). It only impacts the behavior in the fit method, and not the partial_fit method.</p>
+
+        <li><strong>tol : float, default=1e-3</strong></li>
+        <p>The stopping criterion. If it is not None, the iterations will stop when (loss > previous_loss - tol).</p>
+
+        <li><strong>shuffle : bool, default=True</strong></li>
+        <p>Whether or not the training data should be shuffled after each epoch.</p>
+
+        <li><strong>verbose : int, default=0</strong></li>
+        <p>The verbosity level.</p>
+
+        <li><strong>eta0 : float, default=1</strong></li>
+        <p>Constant by which the updates are multiplied.</p>
+
+        <li><strong>n_jobs : int, default=None</strong></li>
+        <p>The number of CPUs to use to do the OVA (One Versus All, for multi-class problems) computation. <code>None</code> means 1 unless in a joblib.parallel_backend context. <code>-1</code> means using all processors.</p>
+
+        <li><strong>random_state : int, RandomState instance, default=None</strong></li>
+        <p>Used to shuffle the training data, when <code>shuffle</code> is set to <code>True</code>. Pass an int for reproducible output across multiple function calls.</p>
+
+        <li><strong>early_stopping : bool, default=False</strong></li>
+        <p>Whether to use early stopping to terminate training when validation. score is not improving. If set to True, it will automatically set aside a stratified fraction of training data as validation and terminate training when validation score is not improving by at least tol for n_iter_no_change consecutive epochs.</p>
+
+        <li><strong>validation_fraction : float, default=0.1</strong></li>
+        <p>The proportion of training data to set aside as validation set for early stopping. Must be between 0 and 1. Only used if early_stopping is True.</p>
+
+        <li><strong>n_iter_no_change : int, default=5</strong></li>
+        <p>Number of iterations with no improvement to wait before early stopping.</p>
+
+        <li><strong>class_weight : dict, {{ '{' }}class_label: weight{{ '}' }} or "balanced", default=None</strong></li>
+        <p>Preset for the class_weight fit parameter.</p>
+        <p>Weights associated with classes. If not given, all classes are supposed to have weight one.</p>
+        <p>The "balanced" mode uses the values of y to automatically adjust weights inversely proportional to class frequencies in the input data as <code>n_samples / (n_classes * np.bincount(y))</code>.</p>
+
+        <li><strong>warm_start : bool, default=False</strong></li>
+        <p>When set to True, reuse the solution of the previous call to fit as initialization, otherwise, just erase the previous solution.</p>
+    </ul>
+
+    <h2 class="protego-bottom-border">Methods</h2>
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">save</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Save a model as a pickled file.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>filename: string</strong>
+                    <p>Path and filename of pickled model to save.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>None</td>
+            </tr>
+        </table> 
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">load</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Load a pickled model.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>filename: string</strong>
+                    <p>Path and filename of pickled model to load.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>None</td>
+            </tr>
+        </table>  
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">train</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Train the classifier.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>train_data: Pandas DataFrame</strong>
+                    <p>Samples to use for training classifier.</p>
+
+                    <strong>train_labels: Pandas Series</strong>
+                    <p>Training samples labels.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>None</td>
+            </tr>
+        </table> 
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">predict</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Predict whether or not samples are benign or malicious.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>data: Pandas DataFrame</strong>
+                    <p>Samples to make predictions on.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>Numpy array containing predictions.</td>
+            </tr>
+        </table>  
+    </mat-expansion-panel>
+
+    <h2 class="protego-bottom-border">Examples</h2>
+    <div class="protego-editor">
+        <button mat-button matTooltip="Toggle Line Numbers" class="protego-editor-btn" (click)="toggleNumbers()"><mat-icon>format_list_numbered</mat-icon></button>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from</span> protego.utils.feature_extractor <span class="protego-key">import</span> FeatureExtractor <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from</span> protego.utils.DataLoader <span class="protego-key">import</span> DataLoader <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from</span> protego.models.batch <span class="protego-key">import</span> PerceptronClassifier <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from</span> sklearn.metrics <span class="protego-key">import</span> accuracy_score <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;</span>data_loader <span class="protego-op">=</span> DataLoader() <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;</span>dataset = data_loader.load() <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-comment"># Split into train/test sets</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;</span>split = <span class="protego-fn">int</span>(<span class="protego-key">len</span>(dataset)*<span class="protego-num">0.8</span>)<br>
+        <span *ngIf="showNumbers" class="protego-ln">10&nbsp;&nbsp;&nbsp;&nbsp;</span>train_data = dataset.loc[:split, :]<br>
+        <span *ngIf="showNumbers" class="protego-ln">11&nbsp;&nbsp;&nbsp;&nbsp;</span>test_data = dataset.loc[split + <span class="protego-num">1</span>:, :]<br>
+        <span *ngIf="showNumbers" class="protego-ln">12&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">13&nbsp;&nbsp;&nbsp;&nbsp;</span>fe = FeatureExtractor() <br>
+        <span *ngIf="showNumbers" class="protego-ln">14&nbsp;&nbsp;&nbsp;&nbsp;</span>train_data = fe.transform(train_data) <br>
+        <span *ngIf="showNumbers" class="protego-ln">15&nbsp;&nbsp;&nbsp;&nbsp;</span>test_data = fe.transform(test_data) <br>
+        <span *ngIf="showNumbers" class="protego-ln">16&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">17&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-comment"># Process dataset for training/testing</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">18&nbsp;&nbsp;&nbsp;&nbsp;</span>features = train_data.columns[:-<span class="protego-num">1</span>]<br>
+        <span *ngIf="showNumbers" class="protego-ln">19&nbsp;&nbsp;&nbsp;&nbsp;</span>train_set = train_data[features]<br>
+        <span *ngIf="showNumbers" class="protego-ln">20&nbsp;&nbsp;&nbsp;&nbsp;</span>train_lbl = train_data[<span class="protego-str">"label"</span>]<br>
+        <span *ngIf="showNumbers" class="protego-ln">21&nbsp;&nbsp;&nbsp;&nbsp;</span>test_set = test_data[features]<br>
+        <span *ngIf="showNumbers" class="protego-ln">22&nbsp;&nbsp;&nbsp;&nbsp;</span>test_lbl = test_data[<span class="protego-str">"label"</span>]<br>
+        <span *ngIf="showNumbers" class="protego-ln">23&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">24&nbsp;&nbsp;&nbsp;&nbsp;</span>clf = PerceptronClassifier() <br>
+        <span *ngIf="showNumbers" class="protego-ln">25&nbsp;&nbsp;&nbsp;&nbsp;</span>clf.train(train_set, train_lbl) <br>
+        <span *ngIf="showNumbers" class="protego-ln">26&nbsp;&nbsp;&nbsp;&nbsp;</span>clf.save(<span class="protego-str">"my_model_perb.pkl"</span>) <br>
+        <span *ngIf="showNumbers" class="protego-ln">27&nbsp;&nbsp;&nbsp;&nbsp;</span>clf.load(<span class="protego-str">"my_model_perb.pkl"</span>) <br>
+        <span *ngIf="showNumbers" class="protego-ln">28&nbsp;&nbsp;&nbsp;&nbsp;</span>y_pred = clf.predict(test_set) <br>
+        <span *ngIf="showNumbers" class="protego-ln">29&nbsp;&nbsp;&nbsp;&nbsp;</span>print(<span class="protego-key">f</span><span class="protego-str">"Accuracy:</span> <span class="protego-const">{{ '{' }}</span><span class="protego-num">100</span>*accuracy_score(test_lbl, y_pred)<span class="protego-num">:3.3f</span><span class="protego-const">{{ '}' }}</span><span class="protego-str">%"</span>) <br>
+    </div>
+</div>

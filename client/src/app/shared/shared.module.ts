@@ -31,7 +31,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -87,6 +87,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
     MatDialogModule,
     MatAutocompleteModule,
     MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FontAwesomeModule,
     NgxMatSelectSearchModule,
     FileUploadModule,
@@ -138,6 +140,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatRippleModule,
     MatRadioModule,
     FontAwesomeModule,
     BigInputComponent,

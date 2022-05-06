@@ -1,0 +1,210 @@
+<div class="protego-page-container protego-methods">
+    <h1>LogisticRegressionClassifier</h1>
+    <p>A Logistic Regression classifier.</p>
+
+    <h2 class="protego-bottom-border">Parameters</h2>
+    <ul>
+        <li><strong>penalty : {{ '{' }}"l1", "l2", "elasticnet", "none"{{ '}' }}, default="l2"</strong></li>
+        <p>Specify the norm of the penalty:</p>
+        <ul>
+            <li><code>'none'</code>: no penalty is added.</li>
+            <li><code>'l2'</code>: add a L2 penalty term and it is the default choice.</li>
+            <li><code>'l1'</code>: add a L1 penalty term.</li>
+            <li><code>'elasticnet'</code>: both L1 and L2 penalty terms are added.</li>
+        </ul>
+        <div class="protego-warning">
+            <p><strong>Warning:</strong> Some penalties may not work with some solvers. See the parameter <code>solver</code> below, to know the compatibility between the penalty and solver. </p>
+        </div>
+        <li><strong>dual : bool, default=False</strong></li>
+        <p>Dual or primal formulation. Dual formulation is only implemented for l2 penalty with liblinear solver. Prefer dual=False when n_samples > n_features.</p>
+
+        <li><strong>tol : float, default=1e-4</strong></li>
+        <p>Tolerance for stopping criteria.</p>
+
+        <li><strong>C : float, default=1.0</strong></li>
+        <p>Inverse of regularization strength; must be a positive float. Like in support vector machines, smaller values specify stronger regularization.</p>
+
+        <li><strong>fit_intercept : bool, default=True</strong></li>
+        <p>Specifies if a constant (a.k.a. bias or intercept) should be added to the decision function.</p>
+
+        <li><strong>intercept_scaling : float, default=1</strong></li>
+        <p>Useful only when the solver "liblinear" is used and self.fit_intercept is set to True. In this case, x becomes [x, self.intercept_scaling], i.e. a "synthetic" feature with constant value equal to intercept_scaling is appended to the instance vector. The intercept becomes <code>intercept_scaling * synthetic_feature_weight</code>.</p>
+        <p>Note: the synthetic feature weight is subject to l1/l2 regularization as all other features. To lessen the effect of regularization on synthetic feature weight (and therefore on the intercept) intercept_scaling has to be increased.</p>
+
+        <li><strong>class_weight : dict or "balanced", default=None</strong></li>
+        <p>Weights associated with classes in the form <code>{{ '{' }}class_label: weight{{ '}' }}</code>. If not given, all classes are supposed to have weight one.</p>
+        <p>The "balanced" mode uses the values of y to automatically adjust weights inversely proportional to class frequencies in the input data as <code>n_samples / (n_classes * np.bincount(y))</code>.</p>
+        <p>The number of nearest neighbors to search for.</p>
+
+        <li><strong>random_state : int, RandomState instance, default=None</strong></li>
+        <p>Used when <code>solver</code> == "sag", "saga" or "liblinear" to shuffle the data.</p>
+
+        <li><strong>solver : {{ '{' }}"newton-cg", "lbfgs", "liblinear", "sag", "saga"{{ '}' }}, default="lbfgs"</strong></li>
+        <p>Algorithm to use in the optimization problem. Default is "lbfgs". To choose a solver, you might want to consider the following aspects:</p>
+        <ul>
+            <li>For small datasets, "liblinear" is a good choice, whereas "sag" and "saga" are faster for large ones.</li>
+            <li>For multiclass problems, only "newton-cg", "sag", "saga" and "lbfgs" handle multinomial loss.</li>
+            <li>"liblinear" is limited to one-versus-rest schemes.</li>
+        </ul>
+        <div class="protego-warning">
+            <p><strong>Warning:</strong> The choice of the algorithm depends on the penalty chosen: Supported penalties by solver:</p>
+            <ul>
+                <li>"newton-cg" - ["l2", "none"]</li>
+                <li>"lbfgs" - ["l2", "none"]</li>
+                <li>"liblinear" - ["l1", "l2"]</li>
+                <li>"sag" - ["l2", "none"]</li>
+                <li>"saga" - ["elasticnet", "l1", "l2", "none"]</li>
+            </ul>
+        </div>
+        <p>Note: "sag" and "saga" fast convergence is only guaranteed on features with approximately the same scale. You can preprocess the data with a scaler from sklearn.preprocessing.</p>
+
+        <li><strong>max_iter : int, default=100</strong></li>
+        <p>Maximum number of iterations taken for the solvers to converge.</p>
+
+        <li><strong>multi_class : {{ '{' }}"auto", "ovr", "multinomial"{{ '}' }}, default="auto"</strong></li>
+        <p>If the option chosen is "ovr", then a binary problem is fit for each label. For "multinomial" the loss minimised is the multinomial loss fit across the entire probability distribution, even when the data is binary. "multinomial" is unavailable when solver="liblinear". "auto" selects "ovr" if the data is binary, or if solver="liblinear", and otherwise selects "multinomial".</p>
+
+        <li><strong>verbose : int, default=0</strong></li>
+        <p>For the liblinear and lbfgs solvers set verbose to any positive number for verbosity.</p>
+
+        <li><strong>warm_start : bool, default=False</strong></li>
+        <p>When set to True, reuse the solution of the previous call to fit as initialization, otherwise, just erase the previous solution. Useless for liblinear solver.</p>
+
+        <li><strong>n_jobs : int, default=None</strong></li>
+        <p>Number of CPU cores used when parallelizing over classes if multi_class="ovr"”. This parameter is ignored when the <code>solver</code> is set to "liblinear" regardless of whether "multi_class" is specified or not. <code>None</code> means 1 unless in a joblib.parallel_backend context. <code>-1</code> means using all processors.</p>
+
+        <li><strong>l1_ratio : float, default=None</strong></li>
+        <p>The Elastic-Net mixing parameter, with <code>0 <= l1_ratio <= 1</code>. Only used if <code>penalty='elasticnet'</code>. Setting <code>l1_ratio=0</code> is equivalent to using <code>penalty='l2'</code>, while setting <code>l1_ratio=1</code> is equivalent to using <code>penalty='l1'</code>. For <code>0 < l1_ratio < 1</code>, the penalty is a combination of L1 and L2.</p>
+    </ul>
+
+    <h2 class="protego-bottom-border">Methods</h2>
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">save</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Save a model as a pickled file.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>filename: string</strong>
+                    <p>Path and filename of pickled model to save.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>None</td>
+            </tr>
+        </table> 
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">load</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Load a pickled model.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>filename: string</strong>
+                    <p>Path and filename of pickled model to load.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>None</td>
+            </tr>
+        </table>  
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">train</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Train the classifier.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>train_data: Pandas DataFrame</strong>
+                    <p>Samples to use for training classifier.</p>
+
+                    <strong>train_labels: Pandas Series</strong>
+                    <p>Training samples labels.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>None</td>
+            </tr>
+        </table> 
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">predict</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Predict whether or not samples are benign or malicious.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>data: Pandas DataFrame</strong>
+                    <p>Samples to make predictions on.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>Numpy array containing predictions.</td>
+            </tr>
+        </table>  
+    </mat-expansion-panel>
+
+    <h2 class="protego-bottom-border">Examples</h2>
+    <div class="protego-editor">
+        <button mat-button matTooltip="Toggle Line Numbers" class="protego-editor-btn" (click)="toggleNumbers()"><mat-icon>format_list_numbered</mat-icon></button>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from</span> protego.utils.feature_extractor <span class="protego-key">import</span> FeatureExtractor <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from</span> protego.utils.DataLoader <span class="protego-key">import</span> DataLoader <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from</span> protego.models.batch <span class="protego-key">import</span> LogisticRegressionClassifier <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from</span> sklearn.metrics <span class="protego-key">import</span> accuracy_score <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;</span>data_loader <span class="protego-op">=</span> DataLoader() <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;</span>dataset = data_loader.load() <br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-comment"># Split into train/test sets</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;</span>split = <span class="protego-fn">int</span>(<span class="protego-key">len</span>(dataset)*<span class="protego-num">0.8</span>)<br>
+        <span *ngIf="showNumbers" class="protego-ln">10&nbsp;&nbsp;&nbsp;&nbsp;</span>train_data = dataset.loc[:split, :]<br>
+        <span *ngIf="showNumbers" class="protego-ln">11&nbsp;&nbsp;&nbsp;&nbsp;</span>test_data = dataset.loc[split + <span class="protego-num">1</span>:, :]<br>
+        <span *ngIf="showNumbers" class="protego-ln">12&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">13&nbsp;&nbsp;&nbsp;&nbsp;</span>fe = FeatureExtractor() <br>
+        <span *ngIf="showNumbers" class="protego-ln">14&nbsp;&nbsp;&nbsp;&nbsp;</span>train_data = fe.transform(train_data) <br>
+        <span *ngIf="showNumbers" class="protego-ln">15&nbsp;&nbsp;&nbsp;&nbsp;</span>test_data = fe.transform(test_data) <br>
+        <span *ngIf="showNumbers" class="protego-ln">16&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">17&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-comment"># Process dataset for training/testing</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">18&nbsp;&nbsp;&nbsp;&nbsp;</span>features = train_data.columns[:-<span class="protego-num">1</span>]<br>
+        <span *ngIf="showNumbers" class="protego-ln">19&nbsp;&nbsp;&nbsp;&nbsp;</span>train_set = train_data[features]<br>
+        <span *ngIf="showNumbers" class="protego-ln">20&nbsp;&nbsp;&nbsp;&nbsp;</span>train_lbl = train_data[<span class="protego-str">"label"</span>]<br>
+        <span *ngIf="showNumbers" class="protego-ln">21&nbsp;&nbsp;&nbsp;&nbsp;</span>test_set = test_data[features]<br>
+        <span *ngIf="showNumbers" class="protego-ln">22&nbsp;&nbsp;&nbsp;&nbsp;</span>test_lbl = test_data[<span class="protego-str">"label"</span>]<br>
+        <span *ngIf="showNumbers" class="protego-ln">23&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">24&nbsp;&nbsp;&nbsp;&nbsp;</span>clf = LogisticRegressionClassifier() <br>
+        <span *ngIf="showNumbers" class="protego-ln">25&nbsp;&nbsp;&nbsp;&nbsp;</span>clf.train(train_set, train_lbl) <br>
+        <span *ngIf="showNumbers" class="protego-ln">26&nbsp;&nbsp;&nbsp;&nbsp;</span>clf.save(<span class="protego-str">"my_model_logb.pkl"</span>) <br>
+        <span *ngIf="showNumbers" class="protego-ln">27&nbsp;&nbsp;&nbsp;&nbsp;</span>clf.load(<span class="protego-str">"my_model_logb.pkl"</span>) <br>
+        <span *ngIf="showNumbers" class="protego-ln">28&nbsp;&nbsp;&nbsp;&nbsp;</span>y_pred = clf.predict(test_set) <br>
+        <span *ngIf="showNumbers" class="protego-ln">29&nbsp;&nbsp;&nbsp;&nbsp;</span>print(<span class="protego-key">f</span><span class="protego-str">"Accuracy:</span> <span class="protego-const">{{ '{' }}</span><span class="protego-num">100</span>*accuracy_score(test_lbl, y_pred)<span class="protego-num">:3.3f</span><span class="protego-const">{{ '}' }}</span><span class="protego-str">%"</span>) <br>
+    </div>
+</div>

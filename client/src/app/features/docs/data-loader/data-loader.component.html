@@ -1,0 +1,89 @@
+<div class="protego-page-container protego-methods">
+    <h1>DataLoader</h1>
+    <p>Loads SQL injection payloads provided by Protego.</p> 
+    <p>Contains benign and malicious samples collected from various sources including:</p>
+    <ul>
+        <li>
+            <a href="https://github.com/fuzzdb-project/fuzzdb/tree/master/attack/sql-injection/payloads-sql-blind" target="_blank">
+                https://github.com/fuzzdb-project/fuzzdb/tree/master/attack/sql-injection/payloads-sql-blind
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/Morzeux/HttpParamsDataset/blob/master/payload_full.csv" target="_blank">
+                https://github.com/Morzeux/HttpParamsDataset/blob/master/payload_full.csv
+            </a>
+        </li>
+        <li>
+            <a href="https://www.kaggle.com/sajid576/sql-injection-dataset" target="_blank">
+                https://www.kaggle.com/sajid576/sql-injection-dataset
+            </a>
+        </li>
+        <li>
+            <a href="https://www.kaggle.com/syedsaqlainhussain/sql-injection-dataset" target="_blank">
+                https://www.kaggle.com/syedsaqlainhussain/sql-injection-dataset
+            </a>
+        </li>
+        <li>
+            <a href="https://archive-beta.ics.uci.edu/ml/datasets/sms+spam+collection" target="_blank">
+                https://archive-beta.ics.uci.edu/ml/datasets/sms+spam+collection
+            </a>
+        </li>
+        <li>
+            <a href="https://www.kaggle.com/uciml/sms-spam-collection-dataset">
+                https://www.kaggle.com/uciml/sms-spam-collection-dataset
+            </a>
+        </li>
+        <li>
+            <a href="https://raw.githubusercontent.com/reevesba/sqli-detection/main/data/raw/payloads.txt?token=GHSAT0AAAAAABQOLK4TMQMWD7FHFC25V4FCYPWANXA" target="_blank">
+                https://raw.githubusercontent.com/reevesba/sqli-detection/main/data/raw/payloads.txt?token=GHSAT0AAAAAABQOLK4TMQMWD7FHFC25V4FCYPWANXA
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt" target="_blank">
+                https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt
+            </a>
+        </li>
+        <li>
+            <a href="https://www.kaggle.com/henilvedant/sqlinjection-payload?select=raw2cleandata2.csv" target="_blank">
+                https://www.kaggle.com/henilvedant/sqlinjection-payload?select=raw2cleandata2.csv
+            </a>
+        </li>
+    </ul>
+
+    <h2 class="protego-bottom-border">Parameters</h2>
+    <ul>
+        <li><strong>None</strong></li>
+    </ul>
+
+    <h2 class="protego-bottom-border">Methods</h2>
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                <span style="margin-left: 0.5em;">load</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p style="margin: 2em 0;">Loads sample payloads into a Pandas DataFrame.</p>
+        <table>
+            <tr>
+                <th>Parameters:</th>
+                <td>
+                    <strong>None</strong>
+                </td>
+            </tr>
+            <tr>
+                <th>Returns:</th>
+                <td>Pandas DataFrame containing SQL injection payloads.</td>
+            </tr>
+        </table> 
+    </mat-expansion-panel>
+
+    <h2 class="protego-bottom-border">Examples</h2>
+    <div class="protego-editor">
+        <button mat-button matTooltip="Toggle Line Numbers" class="protego-editor-btn" (click)="toggleNumbers()"><mat-icon>format_list_numbered</mat-icon></button>
+        <span *ngIf="showNumbers" class="protego-ln">1&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="protego-key">from</span> protego.utils.data_loader <span class="protego-key">import</span> DataLoader <br>
+        <span *ngIf="showNumbers" class="protego-ln">2&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+        <span *ngIf="showNumbers" class="protego-ln">3&nbsp;&nbsp;&nbsp;&nbsp;</span>data_loader = DataLoader() <br>
+        <span *ngIf="showNumbers" class="protego-ln">4&nbsp;&nbsp;&nbsp;&nbsp;</span>dataset = data_loader.load() <br>
+    </div>
+</div>

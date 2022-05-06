@@ -40,7 +40,7 @@ export class PhotoDialogBoxComponent implements OnInit {
     //@Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
     ) {
-        this.uploader = new FileUploader({ url: 'https://protego-app.xyz/api/upload' });
+        this.uploader = new FileUploader({ url: '' });
 
         this.uploader.onAfterAddingFile = (fileItem) => {
           if (this.validateFile(fileItem._file)) {
@@ -48,7 +48,7 @@ export class PhotoDialogBoxComponent implements OnInit {
             let url = (window.URL) ? window.URL.createObjectURL(fileItem._file) : (window as any).webkitURL.createObjectURL(fileItem._file);
             this.url = url;
 
-            // data to be posted
+            // data to be posted is it because const?
             const formData: FormData = new FormData();
             formData.append('file', fileItem._file, fileItem._file.name);
             this.file = formData;

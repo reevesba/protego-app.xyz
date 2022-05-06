@@ -5,6 +5,7 @@ var routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', loadChildren: () => import('./features/home/home.module').then((m) => m.HomeModule) },
     { path: 'workspace', loadChildren: () => import('./features/workspace/workspace.module').then((m) => m.WorkspaceModule) },
+    { path: 'docs', loadChildren: () => import('./features/docs/docs.module').then((m) => m.DocsModule) },
     { path: 'admin', loadChildren: () => import('./features/admin/admin.module').then((m) => m.AdminModule) },
     { path: 'settings', loadChildren: () => import('./features/settings/settings.module').then((m) => m.SettingsModule) },
     { path: 'profile', loadChildren: () => import('./features/profile/profile.module').then((m) => m.ProfileModule) },

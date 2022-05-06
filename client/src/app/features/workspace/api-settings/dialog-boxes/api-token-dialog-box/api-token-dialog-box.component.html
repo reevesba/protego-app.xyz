@@ -11,14 +11,14 @@
 
         <mat-form-field appearance="fill" *ngIf="action != 'Delete'">
             <mat-label>{{ 'protego.datepicker.label' | translate }}</mat-label>
-            <input matInput [matDatepicker]="picker" (dateChange)="updateField2($event)" formControlName="value2" required>
+            <input matInput [matDatepicker]="dp" (dateChange)="updateField2($event)" formControlName="value2" disabled>
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-error *ngIf="(formControl.value2.touched || submitted) && formControl.value2.errors?.required">
                 <mat-icon class="protego-icon">error_outline</mat-icon>
                 {{ 'protego.api-dialog-box.error2' | translate }}
             </mat-error>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp disabled="false"></mat-datepicker>
         </mat-form-field>
     </form>
     

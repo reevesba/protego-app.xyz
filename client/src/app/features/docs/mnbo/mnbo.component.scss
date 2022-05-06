@@ -1,0 +1,117 @@
+@import '../../../../styles-variables';
+
+.protego-page-container {
+  padding: 2em;
+  width: 60%;
+  margin: auto;
+}
+
+@media (max-width: map-get($grid-breakpoints, md)) {
+  .protego-page-container {
+    width: 100%;
+    padding: 1em;
+  }
+}
+
+.protego-divider {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    border-top-width: 2px;
+}
+
+.protego-code-block {
+    width: 100%;
+    max-height: 32rem;
+    overflow: auto;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-break: break-all;
+    border-radius: 4px;
+}
+
+.protego-code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+}
+
+.protego-code-span {
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.protego-bottom-border {
+  margin: 1.5em 0;
+  padding-bottom: 0.4rem;
+}
+
+.protego-methods .mat-expansion-panel {
+  margin: 1em;
+}
+
+.protego-methods .mat-expansion-panel-header {
+  border-radius: 0px 4px 4px 0px;
+}
+
+.protego-methods table {
+  width: 100%;
+  padding: 1em;
+}
+
+.protego-methods table > tr > th {
+  width: 100px;
+  border-right: thin solid black;
+  vertical-align: top;
+}
+
+.protego-methods table > tr > td {
+  padding-left: 2em;
+}
+
+.protego-warning {
+  padding: 1em;
+  border-radius: 4px;
+  margin: 1em 0em;
+}
+
+.protego-editor {
+  background-color: #1e1e1e;
+  color: #C5C8C6;
+  border-radius: 4px;
+  font-family: Lucida Console, Courier New, monospace;
+  padding: 1em;
+  margin: 1em;
+}
+
+.protego-editor .protego-ln {
+  // line numbers
+  color: #949494;
+}
+
+.protego-editor .protego-editor-btn {
+  float: right;
+}
+
+.protego-editor .protego-key,
+.protego-editor .protego-num {
+  color: #6089B4;
+}
+
+.protego-editor .protego-str {
+  color: #9AA83A;
+}
+
+.protego-editor .protego-comment,
+.protego-editor .protego-op {
+  color: #9A9B99;
+}
+
+.protego-editor .protego-fn {
+  color: #CE6700;
+}
+
+.protego-editor .protego-const {
+  color: #8080FF;
+}

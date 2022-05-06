@@ -1,0 +1,75 @@
+@import '../../../../styles-variables';
+
+.protego-page-container {
+  padding: 2em;
+  width: 60%;
+  margin: auto;
+}
+
+@media (max-width: map-get($grid-breakpoints, md)) {
+  .protego-page-container {
+    width: 100%;
+    padding: 1em;
+  }
+}
+
+.protego-divider {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    border-top-width: 2px;
+}
+
+.protego-code-block {
+    width: 100%;
+    max-height: 32rem;
+    overflow: auto;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-break: break-all;
+    border-radius: 4px;
+}
+
+.protego-code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+}
+
+.protego-code-span {
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.protego-bottom-border {
+  margin: 1.5em 0;
+  padding-bottom: 0.4rem;
+}
+
+.protego-methods .mat-expansion-panel {
+  margin: 1em;
+}
+
+.protego-methods .mat-expansion-panel-header {
+  border-radius: 0px 4px 4px 0px;
+}
+
+.protego-methods table {
+  width: 100%;
+  padding: 1em;
+}
+
+.protego-methods table > tr > th {
+  width: 100px;
+  border-right: thin solid black;
+  vertical-align: top;
+}
+
+.protego-methods table > tr > td {
+  padding-left: 2em;
+}
+
+
+
+

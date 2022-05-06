@@ -1,0 +1,86 @@
+<div class="protego-page-container">
+    <div class="protego-wrapper">
+        <div class="protego-toolbar">
+            <mat-toolbar color="primary">
+                <button mat-icon-button (click)="sidenav.toggle()" aria-label="toggle sidenav">
+                    <mat-icon>{{ !sidenav.opened?'arrow_drop_down':'arrow_left' }}</mat-icon>
+                </button>
+
+                <h1 class="protego-title">Docs</h1>
+            </mat-toolbar>
+        </div>
+
+        <mat-sidenav-container [hasBackdrop]="false">
+            <mat-sidenav #sidenav mode="over" [opened]="!media.isActive('xs')" disableClose="true">
+                <mat-nav-list [disableRipple]="true" class=" protego-expansion">
+                    <!-- Overview -->
+                    <a mat-list-item routerLink="overview">Overview</a>
+
+                    <!-- base -->
+                    <mat-expansion-panel class="mat-elevation-z0 protego-expansion">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span mat-list-item>base</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <a mat-list-item *ngFor="let item of baseList" [routerLink]="[item.link]">
+                            {{ item.label }}
+                        </a>
+                    </mat-expansion-panel>
+
+                    <!-- batch -->
+                    <mat-expansion-panel class="mat-elevation-z0 protego-expansion">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span mat-list-item>batch</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <a mat-list-item *ngFor="let item of btchList" [routerLink]="[item.link]">
+                            {{ item.label }}
+                        </a>
+                    </mat-expansion-panel>
+
+                    <!-- online -->
+                    <mat-expansion-panel class="mat-elevation-z0 protego-expansion">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span mat-list-item>online</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <a mat-list-item *ngFor="let item of onlnList" [routerLink]="[item.link]">
+                            {{ item.label }}
+                        </a>
+                    </mat-expansion-panel>
+
+                    <!-- data_loader -->
+                    <mat-expansion-panel class="mat-elevation-z0 protego-expansion">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span mat-list-item>data_loader</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <a mat-list-item routerLink="data-loader">DataLoader</a>
+                    </mat-expansion-panel>
+
+                    <!-- feature_extractor -->
+                    <mat-expansion-panel class="mat-elevation-z0 protego-expansion">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span mat-list-item>feature_extractor</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <a mat-list-item routerLink="feature-extractor">FeatureExtractor</a>
+                    </mat-expansion-panel>
+
+                    <!-- These are just here so that other items don't go behind footer -->
+                    <a mat-list-item></a>
+                    <a mat-list-item></a>
+                </mat-nav-list>
+            </mat-sidenav>
+
+            <div class="protego-content">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-container>
+    </div>
+</div>
